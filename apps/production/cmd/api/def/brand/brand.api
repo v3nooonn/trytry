@@ -1,0 +1,35 @@
+syntax = "v1"
+
+info (
+	title: Brand API
+	desc: The APIs of Brand service.
+	author: "v3nooom"
+	email: "v3nooom@outlook.com"
+	version: "v1"
+)
+
+type Brand {
+	ID   uint64 `json:"id"`
+	Name string `json:"name"`
+}
+
+// Creation
+type (
+	BrandEstbReq {
+		Brand string `json:"brand"`
+	}
+	BrandEstbResp {
+		Code    uint64 `json:"code"`
+		Message string `json:"msg"`
+		Data    Brand  `json:"data"`
+	}
+)
+
+@server(
+	group: brandGrp
+	prefix: api/production/brand
+)
+service production-api {
+	@handler BrandEstb
+	post /estb(BrandEstbReq) returns(BrandEstbResp)
+}

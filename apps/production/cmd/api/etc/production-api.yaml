@@ -1,0 +1,10 @@
+Name: production-api
+Host: 0.0.0.0
+Port: 10001
+Mode: dev
+
+DB:
+  DataSource: root:root@tcp(127.0.0.1:3306)/micro?charset=utf8mb4&parseTime=true&loc=UTC
+Cache:
+  - Host: 127.0.0.1:6379
+    Pass: redispwd

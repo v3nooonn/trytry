@@ -1,0 +1,51 @@
+syntax = "v1"
+
+info (
+	title: Car API
+	desc: The APIs of Car service.
+	author: "v3nooom"
+	email: "v3nooom@outlook.com"
+	version: "v1"
+)
+
+type Car {
+	ID    uint64 `json:"id"`
+	Brand string `json:"brand"`
+	Serie string `json:"serie"`
+}
+
+// Creation
+type (
+	CarEstbReq {
+		Brand uint64 `json:"brand"`
+		Serie string `json:"serie"`
+	}
+	CarEstbResp {
+		Code    uint64 `json:"code"`
+		Message string `json:"msg"`
+		Data    Car    `json:"data"`
+	}
+)
+// Information
+type (
+	CarInfoReq {
+		ID uint64 `json:"id"`
+	}
+	CarInfoResp {
+		Code    uint64 `json:"code"`
+		Message string `json:"msg"`
+		Data    Car    `json:"data"`
+	}
+)
+
+@server(
+	group: carGrp
+	prefix: api/production/car
+)
+service production-api {
+	@handler CarEstb
+	post /estb(CarEstbReq) returns(CarEstbResp)
+	
+	@handler CarInfo
+	post /info(CarInfoReq) returns(CarInfoResp)
+}
