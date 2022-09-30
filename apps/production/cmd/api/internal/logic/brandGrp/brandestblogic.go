@@ -2,9 +2,12 @@ package brandGrp
 
 import (
 	"context"
+	"net/http"
+	"time"
 
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/svc"
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/types"
+	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/model/brand"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +27,28 @@ func NewBrandEstbLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandEs
 }
 
 func (l *BrandEstbLogic) BrandEstb(req *types.BrandEstbReq) (resp *types.BrandEstbResp, err error) {
-	// todo: add your logic here and delete this line
+	now := time.Now().UTC()
 
+	result, err := l.svcCtx.ProductionBrandModel.Insert(l.ctx, &brand.ProductionBrand{
+		Category:  int64(req.Category),
+		Name:      req.Brand,
+		CreatedAt: now,
+		UpdatedAt: now,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	id, _ := result.LastInsertId()
+
+	resp = &types.BrandEstbResp{
+		Code:    http.StatusOK,
+		Message: "ok",
+		Data: types.Brand{
+			ID:       uint64(id),
+			Category: req.Category,
+			Name:     req.Brand,
+		},
+	}
 	return
 }

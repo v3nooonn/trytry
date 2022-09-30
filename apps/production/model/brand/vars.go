@@ -1,4 +1,4 @@
-package model
+package brand
 
 import "github.com/zeromicro/go-zero/core/stores/sqlx"
 

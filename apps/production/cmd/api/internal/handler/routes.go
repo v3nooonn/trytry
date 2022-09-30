@@ -35,6 +35,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/estb",
 				Handler: brandGrp.BrandEstbHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/list",
+				Handler: brandGrp.BrandListHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/api/production/brand"),
 	)

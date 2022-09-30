@@ -9,19 +9,34 @@ info (
 )
 
 type Brand {
-	ID   uint64 `json:"id"`
-	Name string `json:"name"`
+	ID       uint64 `json:"id"`
+	Category uint8  `json:"category"`
+	Name     string `json:"name"`
 }
 
 // Creation
 type (
 	BrandEstbReq {
-		Brand string `json:"brand"`
+		Category uint8  `json:"category"`
+		Brand    string `json:"brand"`
 	}
 	BrandEstbResp {
 		Code    uint64 `json:"code"`
 		Message string `json:"msg"`
 		Data    Brand  `json:"data"`
+	}
+)
+
+// List
+type (
+	BrandListReq {
+		Page uint16 `json:"page"`
+		Size uint16 `json:"size" binding:"required"`
+	}
+	BrandListResp {
+		Code    uint64  `json:"code"`
+		Message string  `json:"msg"`
+		Data    []Brand `json:"data"`
 	}
 )
 
@@ -32,4 +47,7 @@ type (
 service production-api {
 	@handler BrandEstb
 	post /estb(BrandEstbReq) returns(BrandEstbResp)
+	
+	@handler BrandList
+	post /list(BrandListReq) returns(BrandListResp)
 }

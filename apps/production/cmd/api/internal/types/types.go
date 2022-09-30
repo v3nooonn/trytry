@@ -29,16 +29,29 @@ type CarInfoResp struct {
 }
 
 type Brand struct {
-	ID   uint64 `json:"id"`
-	Name string `json:"name"`
+	ID       uint64 `json:"id"`
+	Category uint8  `json:"category"`
+	Name     string `json:"name"`
 }
 
 type BrandEstbReq struct {
-	Brand string `json:"brand"`
+	Category uint8  `json:"category"`
+	Brand    string `json:"brand"`
 }
 
 type BrandEstbResp struct {
 	Code    uint64 `json:"code"`
 	Message string `json:"msg"`
 	Data    Brand  `json:"data"`
+}
+
+type BrandListReq struct {
+	Page uint16 `json:"page"`
+	Size uint16 `json:"size" binding:"required"`
+}
+
+type BrandListResp struct {
+	Code    uint64  `json:"code"`
+	Message string  `json:"msg"`
+	Data    []Brand `json:"data"`
 }
