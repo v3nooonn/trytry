@@ -4,6 +4,7 @@ import (
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/config"
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/model/brand"
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/model/car"
+
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
@@ -20,7 +21,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	conn := sqlx.NewSqlConn("mysql", c.DB.DataSource)
 	return &ServiceContext{
 		Config:               c,
-		ProductionBrandModel: brand.NewProductionBrandModel(conn),
-		ProductionCarModel:   car.NewProductionCarModel(conn),
+		ProductionBrandModel: brand.NewProductionBrandModel(conn, c.Cache),
+		ProductionCarModel:   car.NewProductionCarModel(conn, c.Cache),
 	}
 }

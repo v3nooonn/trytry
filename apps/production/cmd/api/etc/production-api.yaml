@@ -5,6 +5,10 @@ Mode: dev
 
 DB:
   DataSource: root:root@tcp(127.0.0.1:3306)/trytry?charset=utf8mb4&parseTime=true&loc=UTC
-# Cache:
-#   - Host: 127.0.0.1:6379
-#     Pass: redispwd
+Cache:
+  - Host: 127.0.0.1:6379
+    Pass: redispwd
+
+Log:
+  ServiceName: production-api
+  Level: info

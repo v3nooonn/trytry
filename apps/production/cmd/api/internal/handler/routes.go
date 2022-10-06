@@ -17,12 +17,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/estb",
-				Handler: carGrp.CarEstbHandler(serverCtx),
+				Handler: carGrp.EstbHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/info",
-				Handler: carGrp.CarInfoHandler(serverCtx),
+				Handler: carGrp.InfoHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/api/production/car"),
@@ -33,12 +33,12 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/estb",
-				Handler: brandGrp.BrandEstbHandler(serverCtx),
+				Handler: brandGrp.EstbHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/list",
-				Handler: brandGrp.BrandListHandler(serverCtx),
+				Handler: brandGrp.ListHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/api/production/brand"),

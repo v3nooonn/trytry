@@ -45,9 +45,9 @@ type (
 	prefix: api/production/brand
 )
 service production-api {
-	@handler BrandEstb
+	@handler Estb
 	post /estb(BrandEstbReq) returns(BrandEstbResp)
 	
-	@handler BrandList
+	@handler List
 	post /list(BrandListReq) returns(BrandListResp)
 }

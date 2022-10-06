@@ -10,21 +10,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type BrandListLogic struct {
+type ListLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewBrandListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandListLogic {
-	return &BrandListLogic{
+func NewListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListLogic {
+	return &ListLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *BrandListLogic) BrandList(req *types.BrandListReq) (resp *types.BrandListResp, err error) {
+func (l *ListLogic) List(req *types.BrandListReq) (resp *types.BrandListResp, err error) {
 	result, err := l.svcCtx.ProductionBrandModel.Pagination(l.ctx, int64(req.Page), int64(req.Size))
 	if err != nil {
 		return nil, err

@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
@@ -23,9 +24,9 @@ type (
 )
 
 // NewProductionBrandModel returns a model for the database table.
-func NewProductionBrandModel(conn sqlx.SqlConn) ProductionBrandModel {
+func NewProductionBrandModel(conn sqlx.SqlConn, c cache.CacheConf) ProductionBrandModel {
 	return &customProductionBrandModel{
-		defaultProductionBrandModel: newProductionBrandModel(conn),
+		defaultProductionBrandModel: newProductionBrandModel(conn, c),
 	}
 }
 
@@ -36,7 +37,7 @@ func (m *defaultProductionBrandModel) Pagination(ctx context.Context, page, size
 
 	query := fmt.Sprintf("select %s from %s limit %v offset %v", productionBrandRows, m.table, size, offset)
 
-	if err := m.conn.QueryRowsCtx(ctx, &results, query); err != nil {
+	if err := m.CachedConn.QueryRowsNoCacheCtx(ctx, &results, query); err != nil {
 		return nil, err
 	}
 

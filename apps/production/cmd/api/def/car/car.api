@@ -17,7 +17,7 @@ type Car {
 // Creation
 type (
 	CarEstbReq {
-		Brand uint64 `json:"brand"`
+		Brand string `json:"brand"`
 		Serie string `json:"serie"`
 	}
 	CarEstbResp {
@@ -43,9 +43,9 @@ type (
 	prefix: api/production/car
 )
 service production-api {
-	@handler CarEstb
+	@handler Estb
 	post /estb(CarEstbReq) returns(CarEstbResp)
 	
-	@handler CarInfo
+	@handler Info
 	post /info(CarInfoReq) returns(CarInfoResp)
 }

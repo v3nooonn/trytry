@@ -12,21 +12,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type BrandEstbLogic struct {
+type EstbLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewBrandEstbLogic(ctx context.Context, svcCtx *svc.ServiceContext) *BrandEstbLogic {
-	return &BrandEstbLogic{
+func NewEstbLogic(ctx context.Context, svcCtx *svc.ServiceContext) *EstbLogic {
+	return &EstbLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *BrandEstbLogic) BrandEstb(req *types.BrandEstbReq) (resp *types.BrandEstbResp, err error) {
+func (l *EstbLogic) Estb(req *types.BrandEstbReq) (resp *types.BrandEstbResp, err error) {
 	now := time.Now().UTC()
 
 	result, err := l.svcCtx.ProductionBrandModel.Insert(l.ctx, &brand.ProductionBrand{

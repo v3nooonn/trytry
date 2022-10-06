@@ -1,6 +1,9 @@
 package car
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ ProductionCarModel = (*customProductionCarModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewProductionCarModel returns a model for the database table.
-func NewProductionCarModel(conn sqlx.SqlConn) ProductionCarModel {
+func NewProductionCarModel(conn sqlx.SqlConn, c cache.CacheConf) ProductionCarModel {
 	return &customProductionCarModel{
-		defaultProductionCarModel: newProductionCarModel(conn),
+		defaultProductionCarModel: newProductionCarModel(conn, c),
 	}
 }

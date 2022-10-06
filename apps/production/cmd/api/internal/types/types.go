@@ -8,7 +8,7 @@ type Car struct {
 }
 
 type CarEstbReq struct {
-	Brand uint64 `json:"brand"`
+	Brand string `json:"brand"`
 	Serie string `json:"serie"`
 }
 
