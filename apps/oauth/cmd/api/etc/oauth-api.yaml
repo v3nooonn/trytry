@@ -1,15 +1,20 @@
-Name: production-api
+Name: oauth-api
 Host: 0.0.0.0
-Port: 10003
+Port: 10001
 Mode: dev
+
+Auth:
+  Secret: v3nooom-secret
+  Expire: 30
 
 DB:
   DataSource: root:root@tcp(127.0.0.1:3306)/trytry?charset=utf8mb4&parseTime=true&loc=UTC
 Cache:
   - Host: 127.0.0.1:6379
     Pass: redispwd
-    Type: node
 
-Log:
-  ServiceName: production-api
-  Level: info
+CustomerRpc:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: customer.rpc

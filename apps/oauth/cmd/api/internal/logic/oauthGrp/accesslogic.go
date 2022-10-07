@@ -1,0 +1,68 @@
+package oauthGrp
+
+import (
+	"context"
+	"net/http"
+	"time"
+
+	"github.com/dgrijalva/jwt-go"
+	"github.com/v3nooonn/trytry-based-on-looklook/apps/customer/cmd/rpc/pb/customer"
+	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/api/internal/svc"
+	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/api/internal/types"
+
+	"github.com/zeromicro/go-zero/core/logx"
+)
+
+type AccessLogic struct {
+	logx.Logger
+	ctx    context.Context
+	svcCtx *svc.ServiceContext
+}
+
+func NewAccessLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AccessLogic {
+	return &AccessLogic{
+		Logger: logx.WithContext(ctx),
+		ctx:    ctx,
+		svcCtx: svcCtx,
+	}
+}
+
+func (l *AccessLogic) JWTGener(identifier string) (string, error) {
+	dur := time.Hour * 24 * time.Duration(l.svcCtx.Config.Auth.Expire)
+
+	// claims := make(jwt.MapClaims)
+	std := jwt.StandardClaims{
+		ExpiresAt: time.Now().Add(dur).Unix(),
+		IssuedAt:  time.Now().Unix(),
+		Issuer:    "v3nooom",
+		Id:        identifier,
+	}
+
+	token := jwt.New(jwt.SigningMethodHS256)
+	token.Claims = std
+	return token.SignedString([]byte(l.svcCtx.Config.Auth.Secret))
+}
+
+func (l *AccessLogic) Access(req *types.AccessReq) (resp *types.AccessResp, err error) {
+	c, err := l.svcCtx.CustomerRpc.InfoByEmail(l.ctx, &customer.InfoByEmailReq{Email: req.Email})
+	if err != nil {
+		return nil, err
+	}
+
+	token, err := l.JWTGener(c.Email)
+	if err != nil {
+		return nil, err
+	}
+
+	resp = &types.AccessResp{
+		Response: types.Response{
+			Code:    http.StatusOK,
+			Message: "ok",
+		},
+		Data: types.Token{
+			Access: token,
+		},
+	}
+
+	return
+}
