@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OauthClient interface {
-	Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+	Authorization(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
 }
 
 type oauthClient struct {
@@ -33,9 +33,9 @@ func NewOauthClient(cc grpc.ClientConnInterface) OauthClient {
 	return &oauthClient{cc}
 }
 
-func (c *oauthClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+func (c *oauthClient) Authorization(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
 	out := new(Response)
-	err := c.cc.Invoke(ctx, "/oauth.Oauth/Ping", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/oauth.Oauth/Authorization", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *oauthClient) Ping(ctx context.Context, in *Request, opts ...grpc.CallOp
 // All implementations must embed UnimplementedOauthServer
 // for forward compatibility
 type OauthServer interface {
-	Ping(context.Context, *Request) (*Response, error)
+	Authorization(context.Context, *Request) (*Response, error)
 	mustEmbedUnimplementedOauthServer()
 }
 
@@ -54,8 +54,8 @@ type OauthServer interface {
 type UnimplementedOauthServer struct {
 }
 
-func (UnimplementedOauthServer) Ping(context.Context, *Request) (*Response, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
+func (UnimplementedOauthServer) Authorization(context.Context, *Request) (*Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Authorization not implemented")
 }
 func (UnimplementedOauthServer) mustEmbedUnimplementedOauthServer() {}
 
@@ -70,20 +70,20 @@ func RegisterOauthServer(s grpc.ServiceRegistrar, srv OauthServer) {
 	s.RegisterService(&Oauth_ServiceDesc, srv)
 }
 
-func _Oauth_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Oauth_Authorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Request)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OauthServer).Ping(ctx, in)
+		return srv.(OauthServer).Authorization(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/oauth.Oauth/Ping",
+		FullMethod: "/oauth.Oauth/Authorization",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OauthServer).Ping(ctx, req.(*Request))
+		return srv.(OauthServer).Authorization(ctx, req.(*Request))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -96,8 +96,8 @@ var Oauth_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*OauthServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Ping",
-			Handler:    _Oauth_Ping_Handler,
+			MethodName: "Authorization",
+			Handler:    _Oauth_Authorization_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

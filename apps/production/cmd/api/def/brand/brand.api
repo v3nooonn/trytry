@@ -41,6 +41,7 @@ type (
 )
 
 @server(
+	middleware: Authentication,Authorization
 	group: brandGrp
 	prefix: api/production/brand
 )

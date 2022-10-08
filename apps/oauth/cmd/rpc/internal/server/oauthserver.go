@@ -22,7 +22,7 @@ func NewOauthServer(svcCtx *svc.ServiceContext) *OauthServer {
 	}
 }
 
-func (s *OauthServer) Ping(ctx context.Context, in *oauth.Request) (*oauth.Response, error) {
-	l := logic.NewPingLogic(ctx, s.svcCtx)
-	return l.Ping(in)
+func (s *OauthServer) Authorization(ctx context.Context, in *oauth.Request) (*oauth.Response, error) {
+	l := logic.NewAuthorizationLogic(ctx, s.svcCtx)
+	return l.Authorization(in)
 }

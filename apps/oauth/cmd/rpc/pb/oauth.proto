@@ -4,13 +4,13 @@ package oauth;
 option go_package="./oauth";
 
 message Request {
-  string ping = 1;
+  string token = 1;
 }
 
 message Response {
-  string pong = 1;
+  bool permitted = 1;
 }
 
 service Oauth {
-  rpc Ping(Request) returns(Response);
+  rpc Authorization(Request) returns(Response);
 }

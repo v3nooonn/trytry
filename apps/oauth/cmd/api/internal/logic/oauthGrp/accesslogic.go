@@ -5,11 +5,11 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/customer/cmd/rpc/pb/customer"
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/api/internal/svc"
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/api/internal/types"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -28,19 +28,25 @@ func NewAccessLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AccessLogi
 }
 
 func (l *AccessLogic) JWTGener(identifier string) (string, error) {
-	dur := time.Hour * 24 * time.Duration(l.svcCtx.Config.Auth.Expire)
-
-	// claims := make(jwt.MapClaims)
-	std := jwt.StandardClaims{
-		ExpiresAt: time.Now().Add(dur).Unix(),
-		IssuedAt:  time.Now().Unix(),
-		Issuer:    "v3nooom",
-		Id:        identifier,
+	pvtKey, err := jwt.ParseRSAPrivateKeyFromPEM([]byte(l.svcCtx.Config.Auth.PrivateKey))
+	if err != nil {
+		return "", err
 	}
 
-	token := jwt.New(jwt.SigningMethodHS256)
-	token.Claims = std
-	return token.SignedString([]byte(l.svcCtx.Config.Auth.Secret))
+	dur := time.Hour * 24 * time.Duration(l.svcCtx.Config.Auth.ExpirationDay)
+
+	// claims := make(jwt.MapClaims)
+	token := jwt.NewWithClaims(
+		jwt.SigningMethodRS256,
+		jwt.StandardClaims{
+			ExpiresAt: time.Now().Add(dur).Unix(),
+			IssuedAt:  time.Now().Unix(),
+			Issuer:    "v3nooom",
+			Id:        identifier,
+		},
+	)
+
+	return token.SignedString(pvtKey)
 }
 
 func (l *AccessLogic) Access(req *types.AccessReq) (resp *types.AccessResp, err error) {

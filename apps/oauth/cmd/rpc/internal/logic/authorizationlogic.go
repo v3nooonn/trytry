@@ -9,22 +9,24 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type PingLogic struct {
+type AuthorizationLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
 }
 
-func NewPingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PingLogic {
-	return &PingLogic{
+func NewAuthorizationLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AuthorizationLogic {
+	return &AuthorizationLogic{
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
 	}
 }
 
-func (l *PingLogic) Ping(in *oauth.Request) (*oauth.Response, error) {
-	// todo: add your logic here and delete this line
+func (l *AuthorizationLogic) Authorization(in *oauth.Request) (*oauth.Response, error) {
+	logx.Info("--- Middleware:RPC: Authentication")
 
-	return &oauth.Response{}, nil
+	return &oauth.Response{
+		Permitted: true,
+	}, nil
 }

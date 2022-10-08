@@ -10,7 +10,7 @@ type Config struct {
 	CustomerRpc zrpc.RpcClientConf
 
 	Auth struct {
-		Secret string
-		Expire int64
+		PrivateKey    string
+		ExpirationDay int64
 	}
 }

@@ -7,7 +7,10 @@ import (
 )
 
 type ServiceContext struct {
-	Config      config.Config
+	// configuration
+	Config config.Config
+
+	// rpc
 	CustomerRpc customerclient.Customer
 }
 

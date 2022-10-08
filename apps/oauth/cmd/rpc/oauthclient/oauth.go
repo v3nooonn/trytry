@@ -17,7 +17,7 @@ type (
 	Response = oauth.Response
 
 	Oauth interface {
-		Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
+		Authorization(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error)
 	}
 
 	defaultOauth struct {
@@ -31,7 +31,7 @@ func NewOauth(cli zrpc.Client) Oauth {
 	}
 }
 
-func (m *defaultOauth) Ping(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
+func (m *defaultOauth) Authorization(ctx context.Context, in *Request, opts ...grpc.CallOption) (*Response, error) {
 	client := oauth.NewOauthClient(m.cli.Conn())
-	return client.Ping(ctx, in, opts...)
+	return client.Authorization(ctx, in, opts...)
 }

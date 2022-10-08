@@ -39,6 +39,7 @@ type (
 )
 
 @server(
+	middleware: Authentication,Authorization
 	group: carGrp
 	prefix: api/production/car
 )
