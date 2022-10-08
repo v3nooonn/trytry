@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
 
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/config"
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/handler"
@@ -22,6 +23,13 @@ func main() {
 
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
+
+	// global middelware registration
+	server.Use(func(next http.HandlerFunc) http.HandlerFunc {
+		return func(w http.ResponseWriter, r *http.Request) {
+
+		}
+	})
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)

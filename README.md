@@ -48,7 +48,9 @@ goctl api go -api production.api -dir ../
 ---
 
 ### Model related
+
 1. Template Generation
+
 ```bash
 // Path: apps/production
 // With: cache, fundamental table, target foler
@@ -56,6 +58,7 @@ goctl model mysql datasource --url="root:root@tcp(127.0.0.1:3306)/trytry" -table
 ```
 
 2. Update `etc/production-api.yaml`
+
 ```yaml
 Name: production-api
 Host: 0.0.0.0
@@ -68,7 +71,9 @@ Cache:
   - Host: 127.0.0.1:6379
     Pass: redispwd
 ```
+
 3. Update `internal/config/config.go`
+
 ```go
 package config
 
@@ -85,4 +90,22 @@ type Config struct {
 	}
 	Cache cache.CacheConf
 }
+```
+
+### RPC Related
+
+1. Gen proto file `.../rpc/pb`
+
+```
+goctl rpc -o customer.proto
+```
+
+2. Edit `customer.proto`
+3. Gen code
+
+```
+// Path: /apps/customer/cmd/pb
+// --go_out 与 --go-grpc_out 生成的最终目录必须一致
+// --go_out & --go-grpc_out 和 --zrpc_out 的生成的最终目录必须不为同一目录
+goctl rpc protoc customer.proto --go_out=. --go-grpc_out=. --zrpc_out=../
 ```
