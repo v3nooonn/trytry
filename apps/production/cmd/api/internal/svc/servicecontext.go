@@ -30,8 +30,8 @@ type ServiceContext struct {
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	rpcClient := oauthclient.NewOauth(zrpc.MustNewClient(c.OAuthRpc))
-
 	conn := sqlx.NewSqlConn("mysql", c.DB.DataSource)
+
 	return &ServiceContext{
 		Config:               c,
 		OAuthRpc:             rpcClient,
