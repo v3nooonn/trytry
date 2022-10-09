@@ -7,6 +7,12 @@ Log:
   ServiceName: oauth-api
   Level: info
 
+DB:
+  DataSource: root:root@tcp(127.0.0.1:3306)/trytry?charset=utf8mb4&parseTime=true&loc=UTC
+Cache:
+  - Host: 127.0.0.1:6379
+    Pass: redispwd
+
 Auth:
   PrivateKey: |
     -----BEGIN PRIVATE KEY-----
@@ -37,13 +43,7 @@ Auth:
     U3iIjeInHzDoXUj893YtKP0HRYWpstiLHdDwgwpXigQRFEzfqPOQnVoEqLSTpXi7
     7i9+j4jJ3/JnkonY6ygJw9h/cw==
     -----END PRIVATE KEY-----
-  ExpirationDay: 30
-
-DB:
-  DataSource: root:root@tcp(127.0.0.1:3306)/trytry?charset=utf8mb4&parseTime=true&loc=UTC
-Cache:
-  - Host: 127.0.0.1:6379
-    Pass: redispwd
+  ExpireDay: 30
 
 CustomerRpc:
   Etcd:

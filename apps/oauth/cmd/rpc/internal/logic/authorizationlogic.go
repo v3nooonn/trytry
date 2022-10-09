@@ -24,7 +24,7 @@ func NewAuthorizationLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Aut
 }
 
 func (l *AuthorizationLogic) Authorization(in *oauth.Request) (*oauth.Response, error) {
-	logx.Info("--- Middleware:RPC: Authentication")
+	logx.Info("--- OAuth:RPC: Authorization")
 
 	return &oauth.Response{
 		Permitted: true,

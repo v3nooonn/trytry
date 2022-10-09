@@ -10,6 +10,7 @@ import (
 	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest"
 )
 
@@ -29,7 +30,9 @@ func main() {
 		return func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Content-Type", "application/json")
 
+			logx.Info("--- Production:Globle: Middleware Before")
 			next(w, r)
+			logx.Info("--- Production:Globle: Middleware After")
 		}
 	})
 

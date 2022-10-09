@@ -29,7 +29,7 @@ type MiddlewareError struct {
 
 func (m *AuthenticationMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		logx.Info("--- Middleware: Authentication")
+		logx.Info("--- Production:Middleware: Authentication Before")
 
 		headerStr := r.Header.Get("Authorization")
 		headers := strings.Split(headerStr, " ")
@@ -66,5 +66,7 @@ func (m *AuthenticationMiddleware) Handle(next http.HandlerFunc) http.HandlerFun
 		}
 
 		next(w, r)
+
+		logx.Info("--- Production:Middleware: Authentication After")
 	}
 }

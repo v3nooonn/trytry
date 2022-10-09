@@ -33,7 +33,7 @@ func (l *AccessLogic) JWTGener(identifier string) (string, error) {
 		return "", err
 	}
 
-	dur := time.Hour * 24 * time.Duration(l.svcCtx.Config.Auth.ExpirationDay)
+	dur := time.Hour * 24 * time.Duration(l.svcCtx.Config.Auth.ExpireDay)
 
 	// claims := make(jwt.MapClaims)
 	token := jwt.NewWithClaims(

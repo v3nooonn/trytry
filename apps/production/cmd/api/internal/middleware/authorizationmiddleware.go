@@ -24,7 +24,7 @@ func NewAuthorizationMiddleware(c config.Config, rpc oauthclient.Oauth) *Authori
 
 func (m *AuthorizationMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		logx.Info("--- Middleware: Authorization")
+		logx.Info("--- Production:Middleware: Authorization Before")
 
 		resp, err := m.OAuthRpc.Authorization(r.Context(), &oauthclient.Request{})
 		if err != nil {
@@ -45,5 +45,7 @@ func (m *AuthorizationMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc
 		}
 
 		next(w, r)
+
+		logx.Info("--- Production:Middleware: Authorization After")
 	}
 }
