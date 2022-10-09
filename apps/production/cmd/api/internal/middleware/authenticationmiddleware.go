@@ -45,7 +45,7 @@ func (m *AuthenticationMiddleware) Handle(next http.HandlerFunc) http.HandlerFun
 
 		// std := jwt.StandardClaims{}
 		token, err := jwt.ParseWithClaims(tokenStr, &jwt.StandardClaims{}, func(token *jwt.Token) (interface{}, error) {
-			return jwt.ParseRSAPublicKeyFromPEM([]byte(m.Config.Auth.PublicKey))
+			return jwt.ParseRSAPublicKeyFromPEM([]byte(m.Config.OAuth.PublicKey))
 		})
 		if err != nil {
 			w.WriteHeader(http.StatusUnauthorized)

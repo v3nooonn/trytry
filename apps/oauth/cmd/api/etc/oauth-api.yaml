@@ -13,7 +13,7 @@ Cache:
   - Host: 127.0.0.1:6379
     Pass: redispwd
 
-Auth:
+OAuth:
   PrivateKey: |
     -----BEGIN PRIVATE KEY-----
     MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDDJDsImb9nTssh

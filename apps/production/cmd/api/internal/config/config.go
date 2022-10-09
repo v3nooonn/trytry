@@ -10,7 +10,7 @@ type Config struct {
 	rest.RestConf
 	OAuthRpc zrpc.RpcClientConf
 
-	Auth struct {
+	OAuth struct {
 		PublicKey string
 	}
 	DB struct {

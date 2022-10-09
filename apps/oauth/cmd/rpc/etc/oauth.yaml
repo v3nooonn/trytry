@@ -5,7 +5,7 @@ Etcd:
   - 127.0.0.1:2379
   Key: oauth.rpc
 
-Auth:
+OAuth:
   PublicKey: |
     -----BEGIN PUBLIC KEY-----
     MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwyQ7CJm/Z07LIRsI+GBa

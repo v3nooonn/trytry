@@ -14,7 +14,7 @@ Cache:
     Pass: redispwd
     Type: node
 
-Auth:
+OAuth:
   PublicKey: |
     -----BEGIN PUBLIC KEY-----
     MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwyQ7CJm/Z07LIRsI+GBa

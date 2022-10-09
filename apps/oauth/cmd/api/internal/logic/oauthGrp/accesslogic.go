@@ -28,12 +28,12 @@ func NewAccessLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AccessLogi
 }
 
 func (l *AccessLogic) JWTGener(identifier string) (string, error) {
-	pvtKey, err := jwt.ParseRSAPrivateKeyFromPEM([]byte(l.svcCtx.Config.Auth.PrivateKey))
+	pvtKey, err := jwt.ParseRSAPrivateKeyFromPEM([]byte(l.svcCtx.Config.OAuth.PrivateKey))
 	if err != nil {
 		return "", err
 	}
 
-	dur := time.Hour * 24 * time.Duration(l.svcCtx.Config.Auth.ExpireDay)
+	dur := time.Hour * 24 * time.Duration(l.svcCtx.Config.OAuth.ExpireDay)
 
 	// claims := make(jwt.MapClaims)
 	token := jwt.NewWithClaims(

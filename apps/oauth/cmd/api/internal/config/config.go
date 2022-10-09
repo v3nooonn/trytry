@@ -9,7 +9,7 @@ type Config struct {
 	rest.RestConf
 	CustomerRpc zrpc.RpcClientConf
 
-	Auth struct {
+	OAuth struct {
 		PrivateKey string
 		ExpireDay  uint16
 	}
