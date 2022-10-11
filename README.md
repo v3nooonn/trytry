@@ -9,7 +9,7 @@ Putting go-zero into practice locally and personally.
 1. Basic template generation
 
 ```bash
-goctl api -o xxx.api
+goctl api -o xxx.api --remote="https://github.com/v3nooonn/trytry-template.git"
 ```
 
 2. Api files import and group
