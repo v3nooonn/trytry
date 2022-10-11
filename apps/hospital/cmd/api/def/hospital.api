@@ -8,6 +8,10 @@ info (
 	version: "v1"
 )
 
+import (
+	"./health/health.api"
+)
+
 // Establishment
 type (
 	HsptEstbReq {
