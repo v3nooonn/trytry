@@ -4,9 +4,9 @@ package handler
 import (
 	"net/http"
 
-	brandGrp "github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/handler/brandGrp"
-	carGrp "github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/handler/carGrp"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/svc"
+	brandGrp "github.com/v3nooonn/trytry/apps/production/cmd/api/internal/handler/brandGrp"
+	carGrp "github.com/v3nooonn/trytry/apps/production/cmd/api/internal/handler/carGrp"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

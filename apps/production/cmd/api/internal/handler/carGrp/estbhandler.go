@@ -3,9 +3,10 @@ package carGrp
 import (
 	"net/http"
 
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/logic/carGrp"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/svc"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/types"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/logic/carGrp"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/svc"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/types"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

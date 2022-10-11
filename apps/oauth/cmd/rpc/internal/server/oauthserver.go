@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/rpc/internal/logic"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/rpc/internal/svc"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/rpc/pb/oauth"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/rpc/internal/logic"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/rpc/internal/svc"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/rpc/pb/oauth"
 )
 
 type OauthServer struct {

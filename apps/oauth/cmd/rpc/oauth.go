@@ -4,10 +4,10 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/rpc/internal/config"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/rpc/internal/server"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/rpc/internal/svc"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/rpc/pb/oauth"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/rpc/internal/config"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/rpc/internal/server"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/rpc/internal/svc"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/rpc/pb/oauth"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/service"

@@ -6,7 +6,7 @@ package customerclient
 import (
 	"context"
 
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/customer/cmd/rpc/pb/customer"
+	"github.com/v3nooonn/trytry/apps/customer/cmd/rpc/pb/customer"
 
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"

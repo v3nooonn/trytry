@@ -1,8 +1,9 @@
 package svc
 
 import (
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/customer/cmd/rpc/customerclient"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/api/internal/config"
+	"github.com/v3nooonn/trytry/apps/customer/cmd/rpc/customerclient"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/api/internal/config"
+
 	"github.com/zeromicro/go-zero/zrpc"
 )
 

@@ -1,6 +1,6 @@
 <!-- @format -->
 
-# trytry-based-on-looklook
+# trytry
 
 Putting go-zero into practice locally and personally.
 
@@ -9,7 +9,7 @@ Putting go-zero into practice locally and personally.
 1. Basic template generation
 
 ```bash
-goctl api -o production.api
+goctl api -o xxx.api
 ```
 
 2. Api files import and group
@@ -45,54 +45,7 @@ goctl api format --dir .
 4. Code Generation
 
 ```bash
-goctl api go -api production.api -dir ../
-```
-
----
-
-### Model related
-
-1. Code Generation
-
-```bash
-// Path: apps/production
-// With: cache, fundamental table, target foler
-goctl model mysql datasource --url="root:root@tcp(127.0.0.1:3306)/trytry" -table="production_brand" -c -dir=./model
-```
-
-2. Update `etc/production-api.yaml`
-
-```yaml
-Name: production-api
-Host: 0.0.0.0
-Port: 10001
-Mode: dev
-
-DB:
-  DataSource: root:root@tcp(127.0.0.1:3306)/micro?charset=utf8mb4&parseTime=true&loc=UTC
-Cache:
-  - Host: 127.0.0.1:6379
-    Pass: redispwd
-```
-
-3. Update `internal/config/config.go`
-
-```go
-package config
-
-import (
-	"github.com/zeromicro/go-zero/core/stores/cache"
-	"github.com/zeromicro/go-zero/rest"
-)
-
-type Config struct {
-	rest.RestConf
-
-	DB struct {
-		DataSource string
-	}
-	Cache cache.CacheConf
-}
+goctl api go -api xxx.api -dir ../
 ```
 
 ---
@@ -103,7 +56,7 @@ type Config struct {
 
 ```
 // .../rpc/pb
-goctl rpc -o customer.proto
+goctl rpc -o xxx.proto
 ```
 
 2. Edit `customer.proto`
@@ -113,7 +66,7 @@ goctl rpc -o customer.proto
 // Path: /apps/customer/cmd/rpc/pb
 // --go_out 与 --go-grpc_out 生成的最终目录必须一致
 // --go_out & --go-grpc_out 和 --zrpc_out 的生成的最终目录必须不为同一目录
-goctl rpc protoc customer.proto --go_out=. --go-grpc_out=. --zrpc_out=../
+goctl rpc protoc xxx.proto --go_out=. --go-grpc_out=. --zrpc_out=../
 ```
 
 ---
@@ -135,6 +88,7 @@ server.Use(func(next http.HandlerFunc) http.HandlerFunc {
 
 2. Local
    `middleware` tag will create all the middlewares at `apps/service/cmd/api/internal/middleware` in seperate files.
+
    And also, the middleware registration is handled at `apps/service/cmd/api/internal/handler/routes.go`.
 
 ```go
@@ -145,4 +99,28 @@ server.Use(func(next http.HandlerFunc) http.HandlerFunc {
 service xxx-api {
 	...
 }
+```
+
+### Model related
+
+#### MySQL
+
+1. Model Generation
+
+```bash
+// Path: apps/production
+// With: cache, fundamental table, target foler
+goctl model mysql datasource --url="user:pwd@tcp(host:port)/db" -table="table" -c -dir=./model_dir --remote="https://github.com/v3nooonn/trytry-template
+```
+
+---
+
+#### PostgreSQL
+
+1. Model Generation
+
+```bash
+// Path: apps/production
+// With: schema, cache, fundamental table, target foler
+ goctl model pg datasource --url="postgres://user:pwd@127.0.0.1:5434/db?sslmode=disable" --schema="schema" -table="table" -c -dir="target" --remote="https://github.com/v3nooonn/trytry-template
 ```

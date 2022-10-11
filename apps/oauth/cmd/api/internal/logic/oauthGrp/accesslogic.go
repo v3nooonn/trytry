@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/customer/cmd/rpc/pb/customer"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/api/internal/svc"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/api/internal/types"
+	"github.com/v3nooonn/trytry/apps/customer/cmd/rpc/pb/customer"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/api/internal/svc"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/api/internal/types"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/zeromicro/go-zero/core/logx"

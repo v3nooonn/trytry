@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/rpc/oauthclient"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/config"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/rpc/oauthclient"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/config"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

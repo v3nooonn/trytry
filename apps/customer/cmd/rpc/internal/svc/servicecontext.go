@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/customer/cmd/rpc/internal/config"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/customer/model"
+	"github.com/v3nooonn/trytry/apps/customer/cmd/rpc/internal/config"
+	"github.com/v3nooonn/trytry/apps/customer/model"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 

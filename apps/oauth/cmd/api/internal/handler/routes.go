@@ -4,8 +4,8 @@ package handler
 import (
 	"net/http"
 
-	oauthGrp "github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/api/internal/handler/oauthGrp"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/oauth/cmd/api/internal/svc"
+	oauthGrp "github.com/v3nooonn/trytry/apps/oauth/cmd/api/internal/handler/oauthGrp"
+	"github.com/v3nooonn/trytry/apps/oauth/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

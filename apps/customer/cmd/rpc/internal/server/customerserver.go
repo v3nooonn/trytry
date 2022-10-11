@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/customer/cmd/rpc/internal/logic"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/customer/cmd/rpc/internal/svc"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/customer/cmd/rpc/pb/customer"
+	"github.com/v3nooonn/trytry/apps/customer/cmd/rpc/internal/logic"
+	"github.com/v3nooonn/trytry/apps/customer/cmd/rpc/internal/svc"
+	"github.com/v3nooonn/trytry/apps/customer/cmd/rpc/pb/customer"
 )
 
 type CustomerServer struct {

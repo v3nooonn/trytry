@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/svc"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/types"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/model/brand"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/svc"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/types"
+	"github.com/v3nooonn/trytry/apps/production/model/brand"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

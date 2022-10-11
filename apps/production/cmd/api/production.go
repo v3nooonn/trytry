@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/config"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/handler"
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/svc"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/config"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/handler"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/logx"

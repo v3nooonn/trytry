@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/v3nooonn/trytry-based-on-looklook/apps/production/cmd/api/internal/config"
+	"github.com/v3nooonn/trytry/apps/production/cmd/api/internal/config"
 	"github.com/zeromicro/go-zero/core/logx"
 
 	"github.com/dgrijalva/jwt-go"
