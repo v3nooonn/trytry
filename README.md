@@ -110,7 +110,7 @@ service xxx-api {
 ```bash
 // Path: apps/production
 // With: cache, fundamental table, target foler
-goctl model mysql datasource --url="user:pwd@tcp(host:port)/db" -table="table" -c -dir=./model_dir --remote="https://github.com/v3nooonn/trytry-template
+goctl model mysql datasource --url="user:pwd@tcp(host:port)/db" -table="table" -c -dir=./model_dir --remote="https://github.com/v3nooonn/trytry-template"
 ```
 
 ---
@@ -122,5 +122,5 @@ goctl model mysql datasource --url="user:pwd@tcp(host:port)/db" -table="table" -
 ```bash
 // Path: apps/production
 // With: schema, cache, fundamental table, target foler
- goctl model pg datasource --url="postgres://user:pwd@127.0.0.1:5434/db?sslmode=disable" --schema="schema" -table="table" -c -dir="target" --remote="https://github.com/v3nooonn/trytry-template
+ goctl model pg datasource --url="postgres://user:pwd@127.0.0.1:5434/db?sslmode=disable" --schema="schema" -table="table" -c -dir="target" --remote="https://github.com/v3nooonn/trytry-template"
 ```
