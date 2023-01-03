@@ -56,10 +56,10 @@ goctl api go -api xxx.api -dir ../
 
 ```
 // .../rpc/pb
-goctl rpc -o xxx.proto
+goctl rpc -o xxx.proto --remote="https://github.com/v3nooonn/trytry-template.git"
 ```
 
-2. Edit `customer.proto`
+2. Edit `xxx.proto`
 3. Code Generation
 
 ```
