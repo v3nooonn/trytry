@@ -2,13 +2,13 @@ package middleware
 
 import "net/http"
 
-type AllowedMiddleware struct{}
+type AuthorizationMiddleware struct{}
 
-func NewAllowedMiddleware() *AllowedMiddleware {
-	return &AllowedMiddleware{}
+func NewAuthorizationMiddleware() *AuthorizationMiddleware {
+	return &AuthorizationMiddleware{}
 }
 
-func (m *AllowedMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
+func (m *AuthorizationMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// TODO generate middleware implement function, delete after code implementation
 

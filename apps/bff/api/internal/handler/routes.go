@@ -4,7 +4,9 @@ package handler
 import (
 	"net/http"
 
+	dashboard "github.com/v3nooonn/trytry/apps/bff/api/internal/handler/dashboard"
 	ping "github.com/v3nooonn/trytry/apps/bff/api/internal/handler/ping"
+	production "github.com/v3nooonn/trytry/apps/bff/api/internal/handler/production"
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -23,5 +25,35 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			}...,
 		),
 		rest.WithPrefix("/ping"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodGet,
+				Path:    "/",
+				Handler: dashboard.HumanServerHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/dashboard"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.authentication, serverCtx.authorization, serverCtx.lang, serverCtx.remoteAddr},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/views",
+					Handler: production.ViewsHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/:id",
+					Handler: production.DetailHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithPrefix("/production"),
 	)
 }

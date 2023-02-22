@@ -1,5 +1,12 @@
 syntax = "v1"
 
+info (
+	title: "Ping"
+	desc: "Ping"
+	author: "v3nooom"
+	email: "v3nooom@outlook.com"
+)
+
 @server(
 	middleware: allowed
 	group: ping

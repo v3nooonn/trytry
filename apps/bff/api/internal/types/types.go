@@ -4,3 +4,14 @@ package types
 type Pong struct {
 	Up string `json:"up"`
 }
+
+type HumServerResp struct {
+	Up string `json:"up"`
+}
+
+type ProdViews struct {
+}
+
+type ProdDetail struct {
+	Up string `json:"up"`
+}

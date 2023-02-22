@@ -1,0 +1,31 @@
+syntax = "v1"
+
+info (
+	title: "Productions"
+	desc: "Production related api definition"
+	author: "v3nooom"
+	email: "v3nooom@outlook.com"
+)
+
+@server(
+	middleware: authentication, authorization, lang, remoteAddr
+	group: production
+	prefix: production
+)
+service bff-api {
+	@handler Views
+  	get /views returns (ProdViews)
+
+	@handler Detail
+  	get /:id returns (ProdDetail)
+}
+
+// Production
+type (
+	ProdViews{
+
+	}
+	ProdDetail {
+		Up string `json:"up"`
+	}
+)
