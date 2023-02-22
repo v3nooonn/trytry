@@ -1,0 +1,18 @@
+syntax = "v1"
+
+@server(
+	middleware: allowed
+	group: ping
+	prefix: ping
+)
+service bff-api {
+	@handler Ping
+	get / returns (Pong)
+}
+
+// Ping
+type (
+	Pong {
+		Up string `json:"up"`
+	}
+)

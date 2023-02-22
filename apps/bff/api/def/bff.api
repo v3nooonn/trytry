@@ -1,0 +1,10 @@
+syntax = "v1"
+
+info (
+	title: "BFF"
+	desc: "API definition in the layer of BFF"
+	author: "v3nooom"
+	email: "v3nooom@outlook.com"
+)
+
+import "apis/ping.api"

@@ -1,9 +1,0 @@
-syntax = "v1"
-
-info (
-	title: Customer API
-	desc: The APIs of customer service.
-	author: "v3nooom"
-	email: "v3nooom@outlook.com"
-	version: "v1"
-)

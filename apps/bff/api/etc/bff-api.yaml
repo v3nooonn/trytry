@@ -1,0 +1,9 @@
+Name: bff-api
+Log:
+  ServiceName: bff.api
+  Level: error
+  Encoding: plain
+Mode: dev
+
+Host: 0.0.0.0
+Port: 8888
