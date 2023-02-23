@@ -1,10 +1,10 @@
-package rpc
+package from
 
 import (
 	"context"
 	"fmt"
 
-	"github.com/v3nooonn/trytry/common/constant"
+	"github.com/v3nooonn/trytry/pkg/constant/types"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
@@ -17,11 +17,11 @@ func TenantInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySer
 		fmt.Println("error")
 	}
 
-	s := md.Get(constant.ContKey("key").Key())
+	s := md.Get(types.ContextKey("key").Key())
 	if len(s) == 0 {
 		// TODO: return error
 		fmt.Println("error")
 	}
 
-	return handler(context.WithValue(ctx, constant.ContKey("k"), "v"), req)
+	return handler(context.WithValue(ctx, types.ContextKey("k"), "v"), req)
 }

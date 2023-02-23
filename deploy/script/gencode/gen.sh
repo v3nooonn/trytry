@@ -3,14 +3,14 @@
 
 #
 # API Related
-# apps/service/cmd/api/def
-# goctl api -o xxx.api
-# goctl api go -api xxx.api -dir ../
+# apps/service/cmd/outgoing/def
+# goctl outgoing -o xxx.outgoing
+# goctl outgoing go -outgoing xxx.outgoing -dir ../
 
 # RPC Related
-# apps/service/cmd/rpc/pb
-# goctl rpc -o xxx.proto
-# goctl rpc protoc xxx.proto --go_out=. --go-grpc_out=. --zrpc_out=../
+# apps/service/cmd/from/pb
+# goctl from -o xxx.proto
+# goctl from protoc xxx.proto --go_out=. --go-grpc_out=. --zrpc_out=../
 
 #
 # Model Related

@@ -6,7 +6,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-// interceptors
+// ErrLogInterceptor log
 func ErrLogInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 	resp, err = handler(ctx, req)
 	if err != nil {

@@ -1,6 +1,6 @@
-Name: bff-api
+Name: BFF
 Log:
-  ServiceName: bff.api
+  ServiceName: BFF-Log
   Level: error
   Encoding: plain
 Mode: dev

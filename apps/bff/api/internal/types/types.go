@@ -5,7 +5,7 @@ type Pong struct {
 	Up string `json:"up"`
 }
 
-type HumServerResp struct {
+type CustomerServiceResp struct {
 	Up string `json:"up"`
 }
 

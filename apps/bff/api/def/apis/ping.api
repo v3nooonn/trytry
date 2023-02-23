@@ -8,7 +8,7 @@ info (
 )
 
 @server(
-	middleware: allowed
+	middleware: Public
 	group: ping
 	prefix: ping
 )

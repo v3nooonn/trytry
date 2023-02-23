@@ -8,17 +8,18 @@ info (
 )
 
 @server(
+	middleware: Authentication, Authorization, Language, RemoteAddr
 	group: dashboard
 	prefix: dashboard
 )
 service bff-api {
-	@handler HumanServer
-  	get / returns (HumServerResp)
+	@handler CustomerService
+	get / returns (CustomerServiceResp)
 }
 
 // HumanServer
 type (
-	HumServerResp {
+	CustomerServiceResp {
 		Up string `json:"up"`
 	}
 )

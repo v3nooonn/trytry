@@ -15,7 +15,7 @@ import (
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.allowed},
+			[]rest.Middleware{serverCtx.Public},
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
@@ -28,19 +28,22 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/",
-				Handler: dashboard.HumanServerHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Authentication, serverCtx.Authorization, serverCtx.Language, serverCtx.RemoteAddr},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/",
+					Handler: dashboard.CustomerServiceHandler(serverCtx),
+				},
+			}...,
+		),
 		rest.WithPrefix("/dashboard"),
 	)
 
 	server.AddRoutes(
 		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.authentication, serverCtx.authorization, serverCtx.lang, serverCtx.remoteAddr},
+			[]rest.Middleware{serverCtx.Authentication, serverCtx.Authorization, serverCtx.Language, serverCtx.RemoteAddr},
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,

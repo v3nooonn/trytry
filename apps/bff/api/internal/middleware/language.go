@@ -2,13 +2,13 @@ package middleware
 
 import "net/http"
 
-type LangMiddleware struct{}
+type LanguageMiddleware struct{}
 
-func NewLangMiddleware() *LangMiddleware {
-	return &LangMiddleware{}
+func NewLanguageMiddleware() *LanguageMiddleware {
+	return &LanguageMiddleware{}
 }
 
-func (m *LangMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
+func (m *LanguageMiddleware) Handle(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// TODO generate middleware implement function, delete after code implementation
 

@@ -23,7 +23,6 @@ func NewPingLogic(ctx context.Context, svcCtx *svc.ServiceContext) *PingLogic {
 	}
 }
 
-func (l *PingLogic) Ping() (resp *types.Pong, err error) {
-
-	return
+func (l *PingLogic) Ping() (*types.Pong, error) {
+	return &types.Pong{Up: "ok"}, nil
 }

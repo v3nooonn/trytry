@@ -9,19 +9,19 @@ Putting go-zero into practice locally and personally.
 1. Basic template generation
 
 ```bash
-goctl api -o xxx.api --remote="https://github.com/v3nooonn/trytry-template.git"
+goctl outgoing -o xxx.outgoing --remote="https://github.com/v3nooonn/trytry-template.git"
 ```
 
 2. Api files import and group
 
 ```go
-// ./production.api
+// ./production.outgoing
 import (
-	"./car/car.api"
-	"./brand/brand.api"
+	"./car/car.outgoing"
+	"./brand/brand.outgoing"
 )
 
-// ./car/car.api
+// ./car/car.outgoing
 @server(
 	middleware: Authentication,Authorization
 	group: carGrp
@@ -39,13 +39,13 @@ service production-api {
 3. Format
 
 ```bash
-goctl api format --dir .
+goctl outgoing format --dir .
 ```
 
 4. Code Generation
 
 ```bash
-goctl api go -api xxx.api -dir ../
+goctl outgoing go -outgoing xxx.outgoing -dir ../
 ```
 
 ---

@@ -8,20 +8,20 @@ import (
 
 type ServiceContext struct {
 	Config         config.Config
-	lang           rest.Middleware
-	remoteAddr     rest.Middleware
-	allowed        rest.Middleware
-	authentication rest.Middleware
-	authorization  rest.Middleware
+	Authentication rest.Middleware
+	Authorization  rest.Middleware
+	Language       rest.Middleware
+	RemoteAddr     rest.Middleware
+	Public         rest.Middleware
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:         c,
-		lang:           middleware.NewLangMiddleware().Handle,
-		remoteAddr:     middleware.NewRemoteAddrMiddleware().Handle,
-		allowed:        middleware.NewAllowedMiddleware().Handle,
-		authentication: middleware.NewAuthenticationMiddleware().Handle,
-		authorization:  middleware.NewAuthorizationMiddleware().Handle,
+		Authentication: middleware.NewAuthenticationMiddleware().Handle,
+		Authorization:  middleware.NewAuthorizationMiddleware().Handle,
+		Language:       middleware.NewLanguageMiddleware().Handle,
+		RemoteAddr:     middleware.NewRemoteAddrMiddleware().Handle,
+		Public:         middleware.NewPublicMiddleware().Handle,
 	}
 }

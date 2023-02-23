@@ -1,29 +1,28 @@
 syntax = "v1"
 
 info (
-	title: "Productions"
-	desc: "Production related api definition"
+	title: "Production"
+	desc: "Production related APIs definition"
 	author: "v3nooom"
 	email: "v3nooom@outlook.com"
 )
 
 @server(
-	middleware: authentication, authorization, lang, remoteAddr
+	middleware: Authentication, Authorization, Language, RemoteAddr
 	group: production
 	prefix: production
 )
 service bff-api {
 	@handler Views
-  	get /views returns (ProdViews)
-
+	get /views returns (ProdViews)
+	
 	@handler Detail
-  	get /:id returns (ProdDetail)
+	get /:id returns (ProdDetail)
 }
 
 // Production
 type (
-	ProdViews{
-
+	ProdViews {
 	}
 	ProdDetail {
 		Up string `json:"up"`

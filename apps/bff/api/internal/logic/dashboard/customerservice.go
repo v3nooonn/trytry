@@ -9,21 +9,21 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type HumanServerLogic struct {
+type CustomerServiceLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewHumanServerLogic(ctx context.Context, svcCtx *svc.ServiceContext) *HumanServerLogic {
-	return &HumanServerLogic{
+func NewCustomerServiceLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CustomerServiceLogic {
+	return &CustomerServiceLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *HumanServerLogic) HumanServer() (resp *types.HumServerResp, err error) {
+func (l *CustomerServiceLogic) CustomerService() (resp *types.CustomerServiceResp, err error) {
 
 	return
 }
