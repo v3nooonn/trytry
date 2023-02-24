@@ -13,6 +13,6 @@ func ViewsHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := production.NewViewsLogic(r.Context(), svcCtx)
 		resp, err := l.Views()
 
-		e.RespHandler(r, w, resp, err)
+		e.HandlerErr(r, w, resp, err)
 	}
 }

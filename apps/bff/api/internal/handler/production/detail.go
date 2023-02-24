@@ -5,14 +5,23 @@ import (
 
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/logic/production"
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/svc"
+	"github.com/v3nooonn/trytry/apps/bff/api/internal/types"
 	e "github.com/v3nooonn/trytry/pkg/errorx"
+
+	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
 func DetailHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		l := production.NewDetailLogic(r.Context(), svcCtx)
-		resp, err := l.Detail()
+		var req types.DetailReq
+		if err := httpx.Parse(r, &req); err != nil {
+			e.HandlerErr(r, w, nil, e.BadRequest(err.Error()))
+			return
+		}
 
-		e.RespHandler(r, w, resp, err)
+		l := production.NewDetailLogic(r.Context(), svcCtx)
+		resp, err := l.Detail(&req)
+
+		e.HandlerErr(r, w, resp, err)
 	}
 }

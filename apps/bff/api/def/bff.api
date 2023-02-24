@@ -7,6 +7,6 @@ info (
 	email: "v3nooom@outlook.com"
 )
 
-import "apis/ping.outgoing"
-import "apis/dashboard.outgoing"
-import "apis/production.outgoing"
+import "apis/ping.api"
+import "apis/dashboard.api"
+import "apis/production.api"

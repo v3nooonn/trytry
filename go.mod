@@ -3,8 +3,11 @@ module github.com/v3nooonn/trytry
 go 1.19
 
 require (
+	github.com/Masterminds/squirrel v1.5.3
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/v3nooonn/trytry-based-on-looklook v0.0.0-20221009054025-66c5e4d19651
+	github.com/jinzhu/copier v0.3.5
+	github.com/lib/pq v1.10.7
+	github.com/pkg/errors v0.9.1
 	github.com/zeromicro/go-zero v1.4.1
 	google.golang.org/grpc v1.50.0
 	google.golang.org/protobuf v1.28.1
@@ -33,6 +36,8 @@ require (
 	github.com/googleapis/gnostic v0.5.5 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.11.3 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
+	github.com/lann/builder v0.0.0-20180802200727-47ae307949d0 // indirect
+	github.com/lann/ps v0.0.0-20150810152359-62de8c46ede0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2 // indirect

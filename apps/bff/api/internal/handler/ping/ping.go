@@ -13,6 +13,6 @@ func PingHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := ping.NewPingLogic(r.Context(), svcCtx)
 		resp, err := l.Ping()
 
-		e.RespHandler(r, w, resp, err)
+		e.HandlerErr(r, w, resp, err)
 	}
 }

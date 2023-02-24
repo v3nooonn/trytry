@@ -4,74 +4,33 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/zeromicro/go-zero/core/logx"
-	"github.com/zeromicro/go-zero/rest/httpx"
 	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
 
-func RespHandler(r *http.Request, w http.ResponseWriter, resp interface{}, err error) {
-	if err == nil {
-		httpx.WriteJson(w, http.StatusOK, resp)
-		return
-	}
-
-	var respErr any
-	var c int
-
-	sts, ok := status.FromError(err)
-	if ok {
-		c = int(HTTPStatusFromCode(sts.Code()))
-		respErr = &ErrStc{
-			CodeF:    int(HTTPStatusFromCode(sts.Code())),
-			StatusF:  sts.Code().String(),
-			MessageF: sts.Message(),
-		}
-	} else {
-		if e, ok := err.(*ErrStc); ok {
-			c = e.Code()
-			respErr = &ErrStc{CodeF: e.Code(), StatusF: e.Status(), MessageF: e.Message()}
-		} else if e, ok := err.(*ErrStc); ok {
-			c = e.Code()
-			respErr = &ErrStc{CodeF: e.Code(), StatusF: e.Status(), MessageF: e.Message()}
-		} else {
-			respErr = &ErrStc{CodeF: http.StatusInternalServerError, StatusF: http.StatusText(http.StatusInternalServerError), MessageF: err.Error()}
-		}
-	}
-
-	logx.WithContext(r.Context()).Errorf("[ERROR] : %+v ", err)
-
-	httpx.WriteJson(w, c, struct {
-		Error any `json:"error"`
-	}{
-		Error: respErr,
-	})
-}
-
-type ErrStc struct {
+type ErrIns struct {
 	CodeF    int    `json:"code"`
 	StatusF  string `json:"status"`
 	MessageF string `json:"message"`
 }
 
-func (r *ErrStc) Code() int {
+func (r *ErrIns) Code() int {
 	return r.CodeF
 }
 
-func (r *ErrStc) Status() string {
+func (r *ErrIns) Status() string {
 	return r.StatusF
 }
 
-func (r *ErrStc) Message() string {
+func (r *ErrIns) Message() string {
 	return r.MessageF
 }
 
-func (r *ErrStc) Error() string {
+func (r *ErrIns) Error() string {
 	return fmt.Sprintf("code: %v, status: %s, message: %s", r.Code(), r.Status(), r.Message())
 }
 
-func newErr(c int, s string, m string) *ErrStc {
-	return &ErrStc{
+func newErr(c int, s string, m string) *ErrIns {
+	return &ErrIns{
 		CodeF:    c,
 		StatusF:  s,
 		MessageF: m,
@@ -82,24 +41,24 @@ func BadRequest(m string) error {
 	return newErr(http.StatusBadRequest, http.StatusText(http.StatusBadRequest), m)
 }
 
-func Unauthorized(m string) *ErrStc {
+func Unauthorized(m string) *ErrIns {
 	return newErr(http.StatusUnauthorized, http.StatusText(http.StatusUnauthorized), m)
 }
 
-func Forbidden(m string) *ErrStc {
+func Forbidden(m string) *ErrIns {
 	return newErr(http.StatusForbidden, http.StatusText(http.StatusForbidden), m)
 }
 
-func NotFound(m string) *ErrStc {
+func NotFound(m string) *ErrIns {
 	return newErr(http.StatusNotFound, http.StatusText(http.StatusNotFound), m)
-}
-
-func Internal(m string) *ErrStc {
-	return newErr(http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError), m)
 }
 
 func AlreadyExists(m string) error {
 	return newErr(http.StatusConflict, http.StatusText(http.StatusConflict), m)
+}
+
+func Internal(m string) *ErrIns {
+	return newErr(http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError), m)
 }
 
 // HTTPStatusFromCode converts a gRPC error code into the corresponding HTTP response status.

@@ -13,6 +13,6 @@ func CustomerServiceHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		l := dashboard.NewCustomerServiceLogic(r.Context(), svcCtx)
 		resp, err := l.CustomerService()
 
-		e.RespHandler(r, w, resp, err)
+		e.HandlerErr(r, w, resp, err)
 	}
 }

@@ -9,9 +9,28 @@ type CustomerServiceResp struct {
 	Up string `json:"up"`
 }
 
-type ProdViews struct {
+type Brands struct {
+	Brands []ProdBrand `json:"brands"`
 }
 
-type ProdDetail struct {
-	Up string `json:"up"`
+type ProdBrand struct {
+	ID        int64  `json:"id"`
+	Name      string `json:"name"`
+	Category  string `json:"category"`
+	CreatedAt int64  `json:"created_at"`
+	UpdatedAt int64  `json:"updated_at"`
+}
+
+type DetailReq struct {
+	ID int64 `json:"id"`
+}
+
+type Detail struct {
+	ProdID    int64  `json:"prod_id,omitempty"`
+	ID        int64  `json:"id,omitempty"`
+	Category  string `json:"category,omitempty"`
+	Series    string `json:"series,omitempty"`
+	Name      string `json:"name,omitempty"`
+	CreatedAt int64  `json:"created_at,omitempty"`
+	UpdatedAt int64  `json:"updated_at,omitempty"`
 }

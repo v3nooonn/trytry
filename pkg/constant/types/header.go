@@ -2,7 +2,7 @@ package types
 
 import "strings"
 
-type HeaderKey = string
+type HeaderKey string
 
 const (
 	HeaderFieldContentType     HeaderKey = "Content-Type"
@@ -13,14 +13,18 @@ const (
 	HeaderFieldAuthorization   HeaderKey = "Authorization"
 )
 
+func (r HeaderKey) String() string {
+	return string(r)
+}
+
 var AllowedHeaders = strings.Join(
 	[]string{
-		HeaderFieldContentType,
-		HeaderFieldContentEncoding,
-		HeaderFieldAccept,
-		HeaderFieldAcceptEncoding,
-		HeaderFieldAcceptLanguage,
-		HeaderFieldAuthorization,
+		HeaderFieldContentType.String(),
+		HeaderFieldContentEncoding.String(),
+		HeaderFieldAccept.String(),
+		HeaderFieldAcceptEncoding.String(),
+		HeaderFieldAcceptLanguage.String(),
+		HeaderFieldAuthorization.String(),
 		//KeyTenant.String(),
 		//KeyThrough.String(),
 		//KeySource.String(),
