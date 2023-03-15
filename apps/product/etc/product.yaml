@@ -1,14 +1,14 @@
 Name: production.rpc
 Log:
   ServiceName: production.rpc
-  Level: error
+  Level: info
   Encoding: plain
 Mode: dev
 
-ListenOn: 0.0.0.0:8200
+ListenOn: 0.0.0.0:10002
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+    - 127.0.0.1:2379
   Key: production.rpc
 
 #Redis:

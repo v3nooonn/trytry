@@ -1,4 +1,4 @@
-package error
+package errorx
 
 import (
 	"net/http"
@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func HandlerErr(r *http.Request, w http.ResponseWriter, resp interface{}, err error) {
+func Handler(r *http.Request, w http.ResponseWriter, resp interface{}, err error) {
 	if err == nil {
 		httpx.WriteJson(w, http.StatusOK, resp)
 		return

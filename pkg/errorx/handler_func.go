@@ -1,4 +1,4 @@
-package error
+package errorx
 
 import (
 	"net/http"
@@ -7,7 +7,7 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func HandlerFuncErr(w http.ResponseWriter, r *http.Request, err error) {
+func HandleFunc(w http.ResponseWriter, r *http.Request, err error) {
 	e2, ok := err.(*ErrIns)
 	if !ok {
 		e2 = Internal(err.Error())

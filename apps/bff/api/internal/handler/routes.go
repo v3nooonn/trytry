@@ -20,7 +20,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				{
 					Method:  http.MethodGet,
 					Path:    "/",
-					Handler: ping.PingHandler(serverCtx),
+					Handler: ping.Handler(serverCtx),
 				},
 			}...,
 		),

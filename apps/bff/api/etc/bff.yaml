@@ -14,3 +14,22 @@ ProdService:
       - 127.0.0.1:2379
     Key: production.rpc
   NonBlock: true
+
+Redis:
+  Host: 127.0.0.1:6379
+  Pass: redispwd
+  Type: node
+
+Organization:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: organization.rpc
+  NonBlock: true
+
+Production:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: production.rpc
+  NonBlock: true
