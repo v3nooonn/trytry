@@ -9,4 +9,4 @@ info (
 
 import "apis/ping.api"
 import "apis/dashboard.api"
-import "apis/production.api"
+import "apis/product.api"

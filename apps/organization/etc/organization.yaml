@@ -1,0 +1,24 @@
+Name: production.rpc
+Log:
+  ServiceName: production.rpc
+  Level: error
+  Encoding: plain
+Mode: dev
+
+ListenOn: 0.0.0.0:8200
+Etcd:
+  Hosts:
+    - 127.0.0.1:2379
+  Key: organization.rpc
+
+#Redis:
+#  Host: 127.0.0.1:6379
+#  Pass: redispwd
+#  Type: node
+
+DB:
+  DataSource: root:root@tcp(127.0.0.1:3306)/trytry?charset=utf8mb4&parseTime=true&loc=UTC
+Cache:
+  - Host: 127.0.0.1:6379
+    Pass: redispwd
+    Type: node

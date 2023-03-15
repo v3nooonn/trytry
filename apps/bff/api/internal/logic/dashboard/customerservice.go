@@ -24,6 +24,7 @@ func NewCustomerServiceLogic(ctx context.Context, svcCtx *svc.ServiceContext) *C
 }
 
 func (l *CustomerServiceLogic) CustomerService() (resp *types.CustomerServiceResp, err error) {
+	// todo: add your logic here and delete this line
 
 	return
 }

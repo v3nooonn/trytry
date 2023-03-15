@@ -1,0 +1,71 @@
+syntax = "v1"
+
+info(
+	title: "Production"
+	desc: "Production related APIs definition"
+	author: "v3nooom"
+	email: "v3nooom@outlook.com"
+)
+
+@server(
+	//	middleware: Schema, Authentication, Authorization, Language, RemoteAddr
+	middleware: Authentication, Authorization, Language, RemoteAddr
+	group: product
+	prefix: product
+)
+service bff-api {
+	@handler Pagination
+	get /s (PageReq) returns (PageResp)
+	
+	@handler Info
+	get /:id (InfoReq) returns (InfoResp)
+}
+
+// Pagination
+type (
+	PageReq {
+		Cursor int64 `form:"cursor"`
+		Limit  int64 `form:"limit"`
+	}
+	PageResp {
+		Productions []Production `json:"productions"`
+	}
+
+	Production {
+		ID           int64  `json:"id"`
+		Brand        string `json:"brand"`
+		Category     string `json:"category"`
+		Series       string `json:"series"`
+		Name         string `json:"name"`
+		Abbreviation string `json:"abbreviation"`
+		CreatedAt    int64  `json:"created_at"`
+		UpdatedAt    int64  `json:"updated_at"`
+	}
+)
+
+// Info
+type (
+	InfoReq {
+		ID int64 `json:"id"`
+	}
+	InfoResp {
+		ID           int64  `json:"id"`
+		Brand        Brand  `json:"brand"`
+		Category     string `json:"category"`
+		Series       string `json:"series"`
+		Name         string `json:"name"`
+		Abbreviation string `json:"abbreviation"`
+		CreatedAt    int64  `json:"created_at"`
+		UpdatedAt    int64  `json:"updated_at"`
+	}
+
+	Brand {
+		ID           int64        `json:"id"`
+		Organization Organization `json:"organization"`
+	}
+	Organization {
+		ID           int64  `json:"id"`
+		Name         string `json:"name"`
+		Abbreviation string `json:"abbreviation"`
+	}
+)

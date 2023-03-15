@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package organization;
+
+option go_package = "./organization";
+
+service Organization {
+  rpc Info(InfoReq) returns(InfoResp);
+}
+
+message InfoReq {
+  int64 org_id = 1;
+}
+
+message InfoResp {
+  int64 id = 1;
+  string name = 2;
+  string abbreviation = 3;
+}

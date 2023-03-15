@@ -6,7 +6,7 @@ import (
 
 	dashboard "github.com/v3nooonn/trytry/apps/bff/api/internal/handler/dashboard"
 	ping "github.com/v3nooonn/trytry/apps/bff/api/internal/handler/ping"
-	production "github.com/v3nooonn/trytry/apps/bff/api/internal/handler/production"
+	product "github.com/v3nooonn/trytry/apps/bff/api/internal/handler/product"
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -43,20 +43,20 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 
 	server.AddRoutes(
 		rest.WithMiddlewares(
-			[]rest.Middleware{serverCtx.Schema, serverCtx.Authentication, serverCtx.Authorization, serverCtx.Language, serverCtx.RemoteAddr},
+			[]rest.Middleware{serverCtx.Authentication, serverCtx.Authorization, serverCtx.Language, serverCtx.RemoteAddr},
 			[]rest.Route{
 				{
 					Method:  http.MethodGet,
-					Path:    "/views",
-					Handler: production.ViewsHandler(serverCtx),
+					Path:    "/s",
+					Handler: product.PaginationHandler(serverCtx),
 				},
 				{
 					Method:  http.MethodGet,
 					Path:    "/:id",
-					Handler: production.DetailHandler(serverCtx),
+					Handler: product.InfoHandler(serverCtx),
 				},
 			}...,
 		),
-		rest.WithPrefix("/production"),
+		rest.WithPrefix("/product"),
 	)
 }

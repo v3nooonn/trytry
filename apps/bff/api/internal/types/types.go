@@ -9,28 +9,48 @@ type CustomerServiceResp struct {
 	Up string `json:"up"`
 }
 
-type Brands struct {
-	Brands []ProdBrand `json:"brands"`
+type PageReq struct {
+	Cursor int64 `form:"cursor"`
+	Limit  int64 `form:"limit"`
 }
 
-type ProdBrand struct {
-	ID        int64  `json:"id"`
-	Name      string `json:"name"`
-	Category  string `json:"category"`
-	CreatedAt int64  `json:"created_at"`
-	UpdatedAt int64  `json:"updated_at"`
+type PageResp struct {
+	Productions []Production `json:"productions"`
 }
 
-type DetailReq struct {
+type Production struct {
+	ID           int64  `json:"id"`
+	Brand        string `json:"brand"`
+	Category     string `json:"category"`
+	Series       string `json:"series"`
+	Name         string `json:"name"`
+	Abbreviation string `json:"abbreviation"`
+	CreatedAt    int64  `json:"created_at"`
+	UpdatedAt    int64  `json:"updated_at"`
+}
+
+type InfoReq struct {
 	ID int64 `json:"id"`
 }
 
-type Detail struct {
-	ProdID    int64  `json:"prod_id,omitempty"`
-	ID        int64  `json:"id,omitempty"`
-	Category  string `json:"category,omitempty"`
-	Series    string `json:"series,omitempty"`
-	Name      string `json:"name,omitempty"`
-	CreatedAt int64  `json:"created_at,omitempty"`
-	UpdatedAt int64  `json:"updated_at,omitempty"`
+type InfoResp struct {
+	ID           int64  `json:"id"`
+	Brand        Brand  `json:"brand"`
+	Category     string `json:"category"`
+	Series       string `json:"series"`
+	Name         string `json:"name"`
+	Abbreviation string `json:"abbreviation"`
+	CreatedAt    int64  `json:"created_at"`
+	UpdatedAt    int64  `json:"updated_at"`
+}
+
+type Brand struct {
+	ID           int64        `json:"id"`
+	Organization Organization `json:"organization"`
+}
+
+type Organization struct {
+	ID           int64  `json:"id"`
+	Name         string `json:"name"`
+	Abbreviation string `json:"abbreviation"`
 }
