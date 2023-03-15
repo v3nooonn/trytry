@@ -6,7 +6,8 @@ import (
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/logic/product"
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/svc"
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/types"
-	e "github.com/v3nooonn/trytry/pkg/errorx"
+	e "github.com/v3nooonn/trytry/pkg/expands/errorx"
+
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

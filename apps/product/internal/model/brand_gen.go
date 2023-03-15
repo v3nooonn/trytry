@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/zeromicro/go-zero/core/stores/builder"
+	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlc"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
@@ -20,6 +21,8 @@ var (
 	brandRows                = strings.Join(brandFieldNames, ",")
 	brandRowsExpectAutoSet   = strings.Join(stringx.Remove(brandFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), ",")
 	brandRowsWithPlaceHolder = strings.Join(stringx.Remove(brandFieldNames, "`id`", "`create_at`", "`create_time`", "`created_at`", "`update_at`", "`update_time`", "`updated_at`"), "=?,") + "=?"
+
+	cacheBrandIdFmt = "cache:%s:brand:id:"
 )
 
 type (
@@ -31,7 +34,7 @@ type (
 	}
 
 	defaultBrandModel struct {
-		conn  sqlx.SqlConn
+		sqlc.CachedConn
 		table string
 	}
 
@@ -46,23 +49,29 @@ type (
 	}
 )
 
-func newBrandModel(conn sqlx.SqlConn) *defaultBrandModel {
+func newBrandModel(conn sqlx.SqlConn, c cache.CacheConf) *defaultBrandModel {
 	return &defaultBrandModel{
-		conn:  conn,
-		table: "`brand`",
+		CachedConn: sqlc.NewConn(conn, c),
+		table:      "`brand`",
 	}
 }
 
 func (m *defaultBrandModel) Delete(ctx context.Context, id int64) error {
-	query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
-	_, err := m.conn.ExecCtx(ctx, query, id)
+	brandIdKey := fmt.Sprintf("%s%v", cacheBrandIdFmt, id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
+		return conn.ExecCtx(ctx, query, id)
+	}, brandIdKey)
 	return err
 }
 
 func (m *defaultBrandModel) FindOne(ctx context.Context, id int64) (*Brand, error) {
-	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", brandRows, m.table)
+	brandIdKey := fmt.Sprintf("%s%v", cacheBrandIdFmt, id)
 	var resp Brand
-	err := m.conn.QueryRowCtx(ctx, &resp, query, id)
+	err := m.QueryRowCtx(ctx, &resp, brandIdKey, func(ctx context.Context, conn sqlx.SqlConn, v interface{}) error {
+		query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", brandRows, m.table)
+		return conn.QueryRowCtx(ctx, v, query, id)
+	})
 	switch err {
 	case nil:
 		return &resp, nil
@@ -74,15 +83,30 @@ func (m *defaultBrandModel) FindOne(ctx context.Context, id int64) (*Brand, erro
 }
 
 func (m *defaultBrandModel) Insert(ctx context.Context, data *Brand) (sql.Result, error) {
-	query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, brandRowsExpectAutoSet)
-	ret, err := m.conn.ExecCtx(ctx, query, data.OwnBy, data.CategoryId, data.Name, data.Abbreviation)
+	brandIdKey := fmt.Sprintf("%s%v", cacheBrandIdFmt, data.Id)
+	ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?)", m.table, brandRowsExpectAutoSet)
+		return conn.ExecCtx(ctx, query, data.OwnBy, data.CategoryId, data.Name, data.Abbreviation)
+	}, brandIdKey)
 	return ret, err
 }
 
 func (m *defaultBrandModel) Update(ctx context.Context, data *Brand) error {
-	query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, brandRowsWithPlaceHolder)
-	_, err := m.conn.ExecCtx(ctx, query, data.OwnBy, data.CategoryId, data.Name, data.Abbreviation, data.Id)
+	brandIdKey := fmt.Sprintf("%s%v", cacheBrandIdFmt, data.Id)
+	_, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
+		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, brandRowsWithPlaceHolder)
+		return conn.ExecCtx(ctx, query, data.OwnBy, data.CategoryId, data.Name, data.Abbreviation, data.Id)
+	}, brandIdKey)
 	return err
+}
+
+func (m *defaultBrandModel) formatPrimary(primary interface{}) string {
+	return fmt.Sprintf("%s%v", cacheBrandIdFmt, primary)
+}
+
+func (m *defaultBrandModel) queryPrimary(ctx context.Context, conn sqlx.SqlConn, v, primary interface{}) error {
+	query := fmt.Sprintf("select %s from %s where `id` = ? limit 1", brandRows, m.table)
+	return conn.QueryRowCtx(ctx, v, query, primary)
 }
 
 func (m *defaultBrandModel) tableName() string {

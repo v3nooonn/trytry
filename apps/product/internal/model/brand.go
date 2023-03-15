@@ -1,6 +1,9 @@
 package model
 
-import "github.com/zeromicro/go-zero/core/stores/sqlx"
+import (
+	"github.com/zeromicro/go-zero/core/stores/cache"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
+)
 
 var _ BrandModel = (*customBrandModel)(nil)
 
@@ -17,8 +20,8 @@ type (
 )
 
 // NewBrandModel returns a model for the database table.
-func NewBrandModel(conn sqlx.SqlConn) BrandModel {
+func NewBrandModel(conn sqlx.SqlConn, c cache.CacheConf) BrandModel {
 	return &customBrandModel{
-		defaultBrandModel: newBrandModel(conn),
+		defaultBrandModel: newBrandModel(conn, c),
 	}
 }

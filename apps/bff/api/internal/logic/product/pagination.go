@@ -3,8 +3,11 @@ package product
 import (
 	"context"
 
+	"github.com/jinzhu/copier"
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/svc"
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/types"
+	"github.com/v3nooonn/trytry/apps/product/pb/product"
+	e "github.com/v3nooonn/trytry/pkg/expands/errorx"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +26,19 @@ func NewPaginationLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Pagina
 	}
 }
 
-func (l *PaginationLogic) Pagination(req *types.PageReq) (resp *types.PageResp, err error) {
-	// todo: add your logic here and delete this line
+func (l *PaginationLogic) Pagination(req *types.PageReq) (*types.PageResp, error) {
+	resp, err := l.svcCtx.ProductionRPC.Pagination(l.ctx, &product.PaginationReq{
+		Cursor: req.Cursor,
+		Limit:  req.Limit,
+	})
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	prods := make([]types.Production, 0, len(resp.GetProdViews()))
+	if err := copier.Copy(&prods, resp.GetProdViews()); err != nil {
+		return nil, e.Internal(err.Error())
+	}
+
+	return &types.PageResp{Productions: prods}, nil
 }

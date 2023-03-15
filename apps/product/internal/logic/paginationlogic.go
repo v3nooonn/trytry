@@ -24,7 +24,7 @@ func NewPaginationLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Pagina
 }
 
 func (l *PaginationLogic) Pagination(in *product.PaginationReq) (*product.PaginationResp, error) {
-	// todo: add your logic here and delete this line
+	l.svcCtx.Product.Pagination(l.ctx, in.Cursor, in.Cursor)
 
 	return &product.PaginationResp{}, nil
 }

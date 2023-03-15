@@ -5,7 +5,7 @@ import (
 
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/logic/dashboard"
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/svc"
-	e "github.com/v3nooonn/trytry/pkg/errorx"
+	e "github.com/v3nooonn/trytry/pkg/expands/errorx"
 )
 
 func CustomerServiceHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
