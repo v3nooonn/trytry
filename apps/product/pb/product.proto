@@ -6,37 +6,28 @@ option go_package = "./product";
 
 service Product {
   rpc Pagination(PaginationReq) returns(PaginationResp);
-  rpc Info(InfoReq) returns(InfoResp);
+  rpc Info(InfoReq) returns(Production);
 }
 
+// pagination
 message PaginationReq {
   int64 cursor = 1;
   int64 limit = 2;
 }
 
 message PaginationResp {
-  repeated ProdView prod_views = 1;
+  repeated Production products = 1;
 }
 
-message ProdView {
-  int64 id = 1;
-  string brand = 2;
-  string category = 3;
-  string series = 4;
-  string name = 5;
-  string abbreviation = 6;
-  int64 created_at = 7;
-  int64 updated_at = 8;
-}
-
+// information
 message InfoReq {
   int64 product_id = 1;
 }
 
-message InfoResp {
+message Production {
   int64 id = 1;
-  Brand brand = 2;
-  string category = 3;
+  int64 brand_id = 2;
+  int64 category_id = 3;
   string series = 4;
   string name = 5;
   string abbreviation = 6;
@@ -44,13 +35,13 @@ message InfoResp {
   int64 updated_at = 8;
 }
 
-message Brand {
-  int64 id = 1;
-  Organization organization = 2;
-}
-
-message Organization {
-  int64 id = 1;
-  string name = 2;
-  string abbreviation = 3;
-}
+//message Brand {
+//  int64 id = 1;
+//  Organization organization = 2;
+//}
+//
+//message Organization {
+//  int64 id = 1;
+//  string name = 2;
+//  string abbreviation = 3;
+//}

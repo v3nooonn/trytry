@@ -35,8 +35,8 @@ func (l *PaginationLogic) Pagination(req *types.PageReq) (*types.PageResp, error
 		return nil, err
 	}
 
-	prods := make([]types.Production, 0, len(resp.GetProdViews()))
-	if err := copier.Copy(&prods, resp.GetProdViews()); err != nil {
+	prods := make([]types.Production, 0, len(resp.GetProducts()))
+	if err := copier.Copy(&prods, resp.GetProducts()); err != nil {
 		return nil, e.Internal(err.Error())
 	}
 

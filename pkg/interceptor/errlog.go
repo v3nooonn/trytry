@@ -2,6 +2,7 @@ package interceptor
 
 import (
 	"context"
+	"fmt"
 
 	"google.golang.org/grpc"
 )
@@ -11,8 +12,9 @@ func ErrLogInterceptor(ctx context.Context, req interface{}, info *grpc.UnarySer
 	resp, err = handler(ctx, req)
 	if err != nil {
 		// write log to...
-		return resp, err
-	} else {
+		fmt.Printf("Error Log interceptro: %s\n", err.Error())
 		return resp, err
 	}
+
+	return resp, err
 }

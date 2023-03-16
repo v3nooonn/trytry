@@ -5,7 +5,8 @@ import (
 	"strings"
 
 	"github.com/v3nooonn/trytry/pkg/constant/types"
-	"github.com/v3nooonn/trytry/pkg/utils/contextx"
+	"github.com/v3nooonn/trytry/pkg/expands/contextx"
+
 	"google.golang.org/grpc/metadata"
 )
 

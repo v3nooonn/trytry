@@ -3,6 +3,7 @@ package svc
 import (
 	"github.com/v3nooonn/trytry/apps/product/internal/config"
 	"github.com/v3nooonn/trytry/apps/product/internal/model"
+
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
@@ -14,7 +15,6 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	//db := sqlx.NewSqlConn("postgres", c.DB.DataSource)
 	db := sqlx.NewMysql(c.DB.DataSource)
 
 	return &ServiceContext{

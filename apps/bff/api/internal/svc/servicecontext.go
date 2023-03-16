@@ -5,7 +5,7 @@ import (
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/middleware"
 	orgClient "github.com/v3nooonn/trytry/apps/organization/organizationclient"
 	proClient "github.com/v3nooonn/trytry/apps/product/productclient"
-	"github.com/v3nooonn/trytry/pkg/interceptor/from"
+	"github.com/v3nooonn/trytry/pkg/interceptor/outgoing"
 
 	"github.com/zeromicro/go-zero/rest"
 	"github.com/zeromicro/go-zero/zrpc"
@@ -38,11 +38,11 @@ func NewServiceContext(c config.Config) *ServiceContext {
 		// rpc
 		OrganizationRPC: orgClient.NewOrganization(zrpc.MustNewClient(
 			c.Organization,
-			zrpc.WithUnaryClientInterceptor(from.TempFrom)),
+			zrpc.WithUnaryClientInterceptor(outgoing.FakeOut)),
 		),
 		ProductionRPC: proClient.NewProduct(zrpc.MustNewClient(
 			c.Production,
-			zrpc.WithUnaryClientInterceptor(from.TempFrom)),
+			zrpc.WithUnaryClientInterceptor(outgoing.FakeOut)),
 		),
 	}
 }

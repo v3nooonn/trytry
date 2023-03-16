@@ -15,7 +15,7 @@ func PaginationHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var req types.PageReq
 		if err := httpx.Parse(r, &req); err != nil {
-			e.Handler(r, w, nil, err)
+			e.Handler(r, w, nil, e.BadRequest(err.Error()))
 			return
 		}
 

@@ -13,17 +13,14 @@ import (
 )
 
 type (
-	Brand          = product.Brand
 	InfoReq        = product.InfoReq
-	InfoResp       = product.InfoResp
-	Organization   = product.Organization
 	PaginationReq  = product.PaginationReq
 	PaginationResp = product.PaginationResp
-	ProdView       = product.ProdView
+	Production     = product.Production
 
 	Product interface {
 		Pagination(ctx context.Context, in *PaginationReq, opts ...grpc.CallOption) (*PaginationResp, error)
-		Info(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error)
+		Info(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*Production, error)
 	}
 
 	defaultProduct struct {
@@ -42,7 +39,7 @@ func (m *defaultProduct) Pagination(ctx context.Context, in *PaginationReq, opts
 	return client.Pagination(ctx, in, opts...)
 }
 
-func (m *defaultProduct) Info(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*InfoResp, error) {
+func (m *defaultProduct) Info(ctx context.Context, in *InfoReq, opts ...grpc.CallOption) (*Production, error) {
 	client := product.NewProductClient(m.cli.Conn())
 	return client.Info(ctx, in, opts...)
 }

@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-func Tenant(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
+func FakeOut(ctx context.Context, method string, req, reply interface{}, cc *grpc.ClientConn, invoker grpc.UnaryInvoker, opts ...grpc.CallOption) error {
 	return invoker(
 		metadata.NewOutgoingContext(
 			ctx,

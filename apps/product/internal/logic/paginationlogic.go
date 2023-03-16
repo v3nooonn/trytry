@@ -3,6 +3,8 @@ package logic
 import (
 	"context"
 
+	"github.com/jinzhu/copier"
+	"github.com/pkg/errors"
 	"github.com/v3nooonn/trytry/apps/product/internal/svc"
 	"github.com/v3nooonn/trytry/apps/product/pb/product"
 
@@ -24,7 +26,15 @@ func NewPaginationLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Pagina
 }
 
 func (l *PaginationLogic) Pagination(in *product.PaginationReq) (*product.PaginationResp, error) {
-	l.svcCtx.Product.Pagination(l.ctx, in.Cursor, in.Cursor)
+	prodsResp, err := l.svcCtx.Product.Pagination(l.ctx, in.Cursor, in.Limit)
+	if err != nil {
+		return nil, errors.Wrap(err, "product pagination error")
+	}
 
-	return &product.PaginationResp{}, nil
+	products := make([]*product.Production, 0, len(prodsResp))
+	if err := copier.Copy(&products, prodsResp); err != nil {
+		return nil, errors.Wrap(err, "copier error")
+	}
+
+	return &product.PaginationResp{Products: products}, nil
 }
