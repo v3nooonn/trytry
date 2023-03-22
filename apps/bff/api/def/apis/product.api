@@ -15,20 +15,17 @@ info(
 )
 service bff-api {
 	@handler Pagination
-	get /s (PageReq) returns (PageResp)
+	get /s (PgnReq) returns (PageResp)
 	
 	@handler Info
-	get /:id (InfoReq) returns (InfoResp)
+	get /:id (URIID) returns (InfoResp)
 }
 
 // Pagination
 type (
-	PageReq {
-		Cursor int64 `form:"cursor"`
-		Limit  int64 `form:"limit"`
-	}
 	PageResp {
-		Productions []Production `json:"productions"`
+		Pagination  PgnResp       `json:"pagination"`
+		Productions []Production  `json:"data"`
 	}
 
 	Production {
@@ -38,16 +35,13 @@ type (
 		Series       string `json:"series"`
 		Name         string `json:"name"`
 		Abbreviation string `json:"abbreviation"`
-		CreatedAt    time.Time  `json:"created_at"`
-		UpdatedAt    time.Time  `json:"updated_at"`
+		CreatedAt    int64  `json:"created_at"`
+		UpdatedAt    int64  `json:"updated_at"`
 	}
 )
 
 // Info
 type (
-	InfoReq {
-		ID int64 `json:"id"`
-	}
 	InfoResp {
 		ID           int64  `json:"id"`
 		Brand        Brand  `json:"brand"`

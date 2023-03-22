@@ -7,6 +7,9 @@ info (
 	email: "v3nooom@outlook.com"
 )
 
-import "apis/ping.api"
-import "apis/dashboard.api"
-import "apis/product.api"
+import (
+	"apis/common.api"
+	"apis/ping.api"
+	"apis/dashboard.api"
+	"apis/product.api"
+)

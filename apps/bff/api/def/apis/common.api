@@ -1,0 +1,27 @@
+syntax = "v1"
+
+info (
+	title: "Common"
+	desc: "common objects in api defination"
+	author: "v3nooom"
+	email: "v3nooom@outlook.com"
+)
+
+//
+type (
+	URIID {
+		ID int64 `json:"id"`
+	}
+)
+
+// pagination
+type (
+	PgnReq {
+		Cursor int64 `form:"cursor"`
+		Limit  int64 `form:"limit"`
+	}
+	PgnResp {
+		Prev string `json:"prev"`
+		Next string `json:"next"`
+	}
+)

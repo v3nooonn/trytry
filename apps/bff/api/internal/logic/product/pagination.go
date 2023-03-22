@@ -3,12 +3,9 @@ package product
 import (
 	"context"
 
-	"github.com/jinzhu/copier"
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/svc"
 	"github.com/v3nooonn/trytry/apps/bff/api/internal/types"
 	"github.com/v3nooonn/trytry/apps/product/pb/product"
-	e "github.com/v3nooonn/trytry/pkg/expands/errorx"
-
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
@@ -26,8 +23,8 @@ func NewPaginationLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Pagina
 	}
 }
 
-func (l *PaginationLogic) Pagination(req *types.PageReq) (*types.PageResp, error) {
-	resp, err := l.svcCtx.ProductionRPC.Pagination(l.ctx, &product.PaginationReq{
+func (l *PaginationLogic) Pagination(req *types.PgnReq) (*types.PageResp, error) {
+	rpcResp, err := l.svcCtx.ProductionRPC.Pagination(l.ctx, &product.PaginationReq{
 		Cursor: req.Cursor,
 		Limit:  req.Limit,
 	})
@@ -35,10 +32,25 @@ func (l *PaginationLogic) Pagination(req *types.PageReq) (*types.PageResp, error
 		return nil, err
 	}
 
-	prods := make([]types.Production, 0, len(resp.GetProducts()))
-	if err := copier.Copy(&prods, resp.GetProducts()); err != nil {
-		return nil, e.Internal(err.Error())
+	prods := make([]types.Production, 0, len(rpcResp.GetProducts()))
+	for _, prod := range rpcResp.GetProducts() {
+		prods = append(prods, types.Production{
+			ID:           prod.GetId(),
+			Brand:        "prod.GetBrandId()",
+			Category:     "prod.GetCategoryId()",
+			Series:       prod.GetSeries(),
+			Name:         prod.GetName(),
+			Abbreviation: prod.GetAbbreviation(),
+			CreatedAt:    prod.GetCreatedAt(),
+			UpdatedAt:    prod.GetUpdatedAt(),
+		})
 	}
 
-	return &types.PageResp{Productions: prods}, nil
+	return &types.PageResp{
+		Pagination: types.PgnResp{
+			Prev: "prev",
+			Next: "next",
+		},
+		Productions: prods,
+	}, nil
 }

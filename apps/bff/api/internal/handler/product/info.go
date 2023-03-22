@@ -13,7 +13,7 @@ import (
 
 func InfoHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.InfoReq
+		var req types.URIID
 		if err := httpx.Parse(r, &req); err != nil {
 			e.Handler(r, w, nil, err)
 			return

@@ -23,7 +23,7 @@ func NewInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *InfoLogic {
 	}
 }
 
-func (l *InfoLogic) Info(req *types.InfoReq) (resp *types.InfoResp, err error) {
+func (l *InfoLogic) Info(req *types.URIID) (resp *types.InfoResp, err error) {
 	// todo: add your logic here and delete this line
 
 	return
