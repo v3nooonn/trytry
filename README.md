@@ -4,12 +4,15 @@
 
 Putting go-zero into practice locally and personally.
 
+### MakeFile
+All the related cmds are gathered in the makefile in each of the service. Commands as below if you want to execute them manually. 
+
 ### API related
 
-1. Basic template generation
+1. Basic api file generation
 
 ```bash
-goctl outgoing -o xxx.outgoing --remote="https://github.com/v3nooonn/trytry-template.git"
+goctl api -o api_dir xxx.api 
 ```
 
 2. Api files import and group
@@ -23,9 +26,9 @@ import (
 
 // ./car/car.outgoing
 @server(
-	middleware: Authentication,Authorization
-	group: carGrp
-	prefix: api/production/car
+   middleware: Authentication, Authorization, Language, RemoteAddr
+   group: GROUP
+   prefix: PREFIX
 )
 service production-api {
 	@handler Estb
@@ -39,13 +42,13 @@ service production-api {
 3. Format
 
 ```bash
-goctl outgoing format --dir .
+goctl api format --dir .
 ```
 
 4. Code Generation
 
 ```bash
-goctl outgoing go -outgoing xxx.outgoing -dir ../
+goctl api go -api ./def/bff.api -dir .
 ```
 
 ---
@@ -56,11 +59,14 @@ goctl outgoing go -outgoing xxx.outgoing -dir ../
 
 ```
 // .../rpc/pb
-goctl rpc -o xxx.proto --remote="https://github.com/v3nooonn/trytry-template.git"
+goctl rpc -o ./pb/brand.proto
 ```
 
 2. Edit `xxx.proto`
 3. Code Generation
+```bash
+goctl rpc protoc ./pb/brand.proto --go_out=./pb --go-grpc_out=./pb --zrpc_out=.
+```
 
 ```
 // Path: /apps/customer/cmd/rpc/pb

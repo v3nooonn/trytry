@@ -12,7 +12,9 @@ fmt:
 
 bff:
 	goctl api -o ./def/bff.api
-api:
+
+def:
 	goctl api -o ./def/apis/$(api).api
+
 code:
 	goctl api go -api ./def/bff.api -dir .

@@ -8,7 +8,6 @@ info(
 )
 
 @server(
-	//	middleware: Schema, Authentication, Authorization, Language, RemoteAddr
 	middleware: Authentication, Authorization, Language, RemoteAddr
 	group: product
 	prefix: product
