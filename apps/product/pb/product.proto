@@ -6,7 +6,7 @@ option go_package = "./product";
 
 service Product {
   rpc Pagination(PaginationReq) returns(PaginationResp);
-  rpc Info(InfoReq) returns(Production);
+  rpc Info(InfoReq) returns(ProductInfo);
 }
 
 // pagination
@@ -16,7 +16,7 @@ message PaginationReq {
 }
 
 message PaginationResp {
-  repeated Production products = 1;
+  repeated ProductInfo products = 1;
 }
 
 // information
@@ -24,7 +24,7 @@ message InfoReq {
   int64 product_id = 1;
 }
 
-message Production {
+message ProductInfo {
   int64 id = 1;
   int64 brand_id = 2;
   int64 category_id = 3;
@@ -34,14 +34,3 @@ message Production {
   int64 created_at = 7;
   int64 updated_at = 8;
 }
-
-//message Brand {
-//  int64 id = 1;
-//  Organization organization = 2;
-//}
-//
-//message Organization {
-//  int64 id = 1;
-//  string name = 2;
-//  string abbreviation = 3;
-//}

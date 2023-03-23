@@ -8,13 +8,6 @@ Mode: dev
 Host: 0.0.0.0
 Port: 8888
 
-ProdService:
-  Etcd:
-    Hosts:
-      - 127.0.0.1:2379
-    Key: production.rpc
-  NonBlock: true
-
 Redis:
   Host: 127.0.0.1:6379
   Pass: redispwd
@@ -25,6 +18,20 @@ Organization:
     Hosts:
       - 127.0.0.1:2379
     Key: organization.rpc
+  NonBlock: true
+
+Category:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: category.rpc
+  NonBlock: true
+
+Brand:
+  Etcd:
+    Hosts:
+      - 127.0.0.1:2379
+    Key: brand.rpc
   NonBlock: true
 
 Production:

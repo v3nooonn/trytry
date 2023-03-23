@@ -5,8 +5,8 @@ go 1.18
 require (
 	github.com/Masterminds/squirrel v1.5.3
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/golang/protobuf v1.5.2
 	github.com/jinzhu/copier v0.3.5
-	github.com/lib/pq v1.10.7
 	github.com/pkg/errors v0.9.1
 	github.com/zeromicro/go-zero v1.4.1
 	google.golang.org/grpc v1.50.0
@@ -29,7 +29,6 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect
 	github.com/golang/mock v1.6.0 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect

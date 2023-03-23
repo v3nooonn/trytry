@@ -11,5 +11,7 @@ type Config struct {
 	Redis redis.RedisConf
 
 	Organization zrpc.RpcClientConf
+	Category     zrpc.RpcClientConf
+	Brand        zrpc.RpcClientConf
 	Production   zrpc.RpcClientConf
 }

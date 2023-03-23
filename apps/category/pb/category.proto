@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package category;
+option go_package="./category";
+
+service Category {
+  rpc Info(InfoReq) returns(CategoryInfo);
+}
+
+// information
+message InfoReq {
+  int64 category_id = 1;
+}
+
+message CategoryInfo {
+  int64 id = 1;
+  string name = 2;
+  string abbreviation = 3;
+  int64 created_at = 4;
+  int64 updated_at = 5;
+}

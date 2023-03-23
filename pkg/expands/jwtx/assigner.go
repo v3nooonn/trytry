@@ -4,7 +4,7 @@ import (
 	"crypto/ecdsa"
 	"time"
 
-	e "github.com/v3nooonn/trytry/pkg/utils/errorx"
+	e "github.com/v3nooonn/trytry/pkg/expands/errorx"
 
 	"github.com/dgrijalva/jwt-go"
 )

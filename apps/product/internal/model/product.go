@@ -32,8 +32,8 @@ func NewProductModel(conn sqlx.SqlConn, c cache.CacheConf) ProductModel {
 }
 
 func (c customProductModel) Pagination(ctx context.Context, cursor, limit int64) ([]Product, error) {
-	sql, _, err := squirrel.Select(productRows).From(c.tableName()).
-		//PlaceholderFormat(squirrel.Dollar).
+	sql, _, err := squirrel.Select(productRows).
+		From(c.tableName()).
 		Where(squirrel.Gt{"id": cursor}).
 		Limit(uint64(limit)).ToSql()
 	if err != nil {

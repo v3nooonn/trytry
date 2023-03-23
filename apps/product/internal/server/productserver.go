@@ -27,7 +27,7 @@ func (s *ProductServer) Pagination(ctx context.Context, in *product.PaginationRe
 	return l.Pagination(in)
 }
 
-func (s *ProductServer) Info(ctx context.Context, in *product.InfoReq) (*product.Production, error) {
+func (s *ProductServer) Info(ctx context.Context, in *product.InfoReq) (*product.ProductInfo, error) {
 	l := logic.NewInfoLogic(ctx, s.svcCtx)
 	return l.Info(in)
 }

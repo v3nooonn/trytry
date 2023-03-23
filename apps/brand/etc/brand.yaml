@@ -1,15 +1,15 @@
-Name: production.rpc
+Name: brand.rpc
 Log:
-  ServiceName: production.rpc
+  ServiceName: brand.rpc
   Level: info
   Encoding: plain
 Mode: dev
 
-ListenOn: 0.0.0.0:10004
+ListenOn: 0.0.0.0:10003
 Etcd:
   Hosts:
     - 127.0.0.1:2379
-  Key: production.rpc
+  Key: brand.rpc
 
 #Redis:
 #  Host: 127.0.0.1:6379

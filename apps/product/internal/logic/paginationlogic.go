@@ -31,7 +31,7 @@ func (l *PaginationLogic) Pagination(in *product.PaginationReq) (*product.Pagina
 		return nil, errors.Wrap(err, "product pagination error")
 	}
 
-	products := make([]*product.Production, 0, len(prodsResp))
+	products := make([]*product.ProductInfo, 0, len(prodsResp))
 	if err := copier.Copy(&products, prodsResp); err != nil {
 		return nil, errors.Wrap(err, "copier error")
 	}

@@ -1,22 +1,22 @@
 package svc
 
 import (
-	"github.com/v3nooonn/trytry/apps/product/internal/config"
-	"github.com/v3nooonn/trytry/apps/product/internal/model"
+	"github.com/v3nooonn/trytry/apps/brand/internal/config"
+	"github.com/v3nooonn/trytry/apps/brand/internal/model"
 
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
 type ServiceContext struct {
-	Config  config.Config
-	Product model.ProductModel
+	Config config.Config
+	Brand  model.BrandModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	db := sqlx.NewMysql(c.DB.DataSource)
 
 	return &ServiceContext{
-		Config:  c,
-		Product: model.NewProductModel(db, c.Cache),
+		Config: c,
+		Brand:  model.NewBrandModel(db, c.Cache),
 	}
 }

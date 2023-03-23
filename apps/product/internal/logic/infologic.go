@@ -23,8 +23,8 @@ func NewInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *InfoLogic {
 	}
 }
 
-func (l *InfoLogic) Info(in *product.InfoReq) (*product.Production, error) {
+func (l *InfoLogic) Info(in *product.InfoReq) (*product.ProductInfo, error) {
 	// todo: add your logic here and delete this line
 
-	return &product.Production{}, nil
+	return &product.ProductInfo{}, nil
 }
