@@ -18,6 +18,20 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			[]rest.Middleware{serverCtx.Public},
 			[]rest.Route{
 				{
+					Method:  http.MethodPost,
+					Path:    "/graphql",
+					Handler: ping.Handler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithPrefix("/ping"),
+	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Public},
+			[]rest.Route{
+				{
 					Method:  http.MethodGet,
 					Path:    "/",
 					Handler: ping.Handler(serverCtx),

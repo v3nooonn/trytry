@@ -1,0 +1,12 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+extend type Query {
+  brands(id: String): [Brand!]!
+}
+
+type Brand {
+  id: ID!
+  name: String!
+}

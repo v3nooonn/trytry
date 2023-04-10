@@ -1,0 +1,7 @@
+type Query {
+    version: ID
+}
+
+type Mutation {
+    version: ID
+}
